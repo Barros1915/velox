@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "velox-framework"
+version = "1.0.0"
+description = "Fast Python Web Framework — WSGI + ASGI, zero dependencies"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.9"
+keywords = ["web", "framework", "wsgi", "asgi", "http", "async"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Internet :: WWW/HTTP :: HTTP Servers",
+    "Topic :: Software Development :: Libraries :: Application Frameworks",
+    "Framework :: AsyncIO",
+]
+
+# Zero dependências obrigatórias
+dependencies = []
+
+[project.optional-dependencies]
+asgi     = ["uvicorn>=0.20"]
+postgres = ["psycopg2-binary>=2.9"]
+redis    = ["redis>=4.0"]
+async    = ["aiosqlite>=0.19", "asyncpg>=0.29"]
+full     = ["uvicorn>=0.20", "psycopg2-binary>=2.9", "redis>=4.0", "aiosqlite>=0.19", "asyncpg>=0.29"]
+dev      = ["pytest>=7.0", "pytest-asyncio>=0.21", "httpx>=0.24"]
+
+[project.scripts]
+velox = "velox.cli:main"
+
+[project.urls]
+Homepage   = "https://github.com/Barros1915/velox"
+Repository = "https://github.com/Barros1915/velox"
+Issues     = "https://github.com/Barros1915/velox/issues"
+
+[tool.setuptools.packages.find]
+where   = ["."]
+include = ["*"]
+
+[tool.setuptools.package-data]
+"*" = ["py.typed", "assets/*"]

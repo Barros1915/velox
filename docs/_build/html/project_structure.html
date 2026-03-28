@@ -1,0 +1,240 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Estrutura do Projeto &mdash; Velox 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=c911a3e7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Configuração" href="configuration.html" />
+    <link rel="prev" title="Quickstart" href="quickstart.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Velox
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Começando</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Estrutura do Projeto</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#criando-um-novo-projeto">Criando um Novo Projeto</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#executando-o-projeto">Executando o Projeto</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#criando-apps-modulares">Criando Apps Modulares</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usando-o-app">Usando o App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#app-api-only">App API-Only</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#proximos-passos">Próximos Passos</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuração</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Routes e URLs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="routing.html">Rotas e Routing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Banco de Dados</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="database.html">Banco de Dados</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Templates</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">Templates</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Arquivos Estáticos</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="static_files.html">Arquivos Estáticos</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Velox</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Estrutura do Projeto</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/project_structure.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="estrutura-do-projeto">
+<h1>Estrutura do Projeto<a class="headerlink" href="#estrutura-do-projeto" title="Link to this heading"></a></h1>
+<p>Este guia mostra como criar e organizar seu projeto Velox.</p>
+<section id="criando-um-novo-projeto">
+<h2>Criando um Novo Projeto<a class="headerlink" href="#criando-um-novo-projeto" title="Link to this heading"></a></h2>
+<p>Use o comando CLI para criar um novo projeto:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>velox<span class="w"> </span>init<span class="w"> </span>meu_projeto
+</pre></div>
+</div>
+<p>Isso cria a estrutura completa:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>meu_projeto/
+├── app.py              # Aplicação principal
+├── .env               # Variáveis de ambiente
+├── .gitignore
+├── requirements.txt
+├── db/                # Arquivos SQLite
+├── static/
+│   ├── css/
+│   │   └── style.css
+│   └── img/
+│       └── velox-logo.png
+└── templates/
+    ├── index.html
+    └── 404.html
+</pre></div>
+</div>
+</section>
+<section id="executando-o-projeto">
+<h2>Executando o Projeto<a class="headerlink" href="#executando-o-projeto" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>meu_projeto
+velox<span class="w"> </span>run
+</pre></div>
+</div>
+<p>Ou:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>meu_projeto
+python<span class="w"> </span>app.py
+</pre></div>
+</div>
+<p>O servidor roda em <a class="reference external" href="http://localhost:8000">http://localhost:8000</a></p>
+</section>
+<section id="criando-apps-modulares">
+<h2>Criando Apps Modulares<a class="headerlink" href="#criando-apps-modulares" title="Link to this heading"></a></h2>
+<p>O Velox permite criar apps modulares (como Django):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>velox<span class="w"> </span>startapp<span class="w"> </span>blog
+</pre></div>
+</div>
+<p>Estrutura de um app:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>blog/
+├── __init__.py
+├── models.py      # Models do banco
+├── views.py      # Rotas/Handlers
+├── admin.py      # Registro no admin
+├── tests.py     # Testes
+└── templates/
+    ├── blog/
+    │   ├── list.html
+    │   └── form.html
+</pre></div>
+</div>
+</section>
+<section id="usando-o-app">
+<h2>Usando o App<a class="headerlink" href="#usando-o-app" title="Link to this heading"></a></h2>
+<p>No <code class="docutils literal notranslate"><span class="pre">app.py</span></code>, inclua o router do app:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">velox</span><span class="w"> </span><span class="kn">import</span> <span class="n">Velox</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">blog.views</span><span class="w"> </span><span class="kn">import</span> <span class="n">router</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Velox</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="c1"># Incluir app com prefixo</span>
+<span class="n">app</span><span class="o">.</span><span class="n">include</span><span class="p">(</span><span class="n">router</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;/blog&#39;</span><span class="p">)</span>
+
+<span class="c1"># Ou use autodiscovery:</span>
+<span class="c1"># app.load_apps([&#39;blog&#39;])</span>
+</pre></div>
+</div>
+<p>Rotas do app ficam em <code class="docutils literal notranslate"><span class="pre">/blog/</span></code>, <code class="docutils literal notranslate"><span class="pre">/blog/&lt;id&gt;</span></code>, etc.</p>
+</section>
+<section id="app-api-only">
+<h2>App API-Only<a class="headerlink" href="#app-api-only" title="Link to this heading"></a></h2>
+<p>Para criar um app sem templates:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>velox<span class="w"> </span>startapp<span class="w"> </span>api<span class="w"> </span>--api
+</pre></div>
+</div>
+<p>Estrutura minimalista:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>api/
+├── __init__.py
+├── models.py
+├── views.py
+├── admin.py
+└── tests.py
+</pre></div>
+</div>
+</section>
+<section id="proximos-passos">
+<h2>Próximos Passos<a class="headerlink" href="#proximos-passos" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Leia <a class="reference internal" href="routing.html"><span class="doc">Rotas e Routing</span></a> para rotas</p></li>
+<li><p>Explore <a class="reference internal" href="database.html"><span class="doc">Banco de Dados</span></a> para banco de dados</p></li>
+<li><p>Aprenda <a class="reference internal" href="templates.html"><span class="doc">Templates</span></a> para templates</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="quickstart.html" class="btn btn-neutral float-left" title="Quickstart" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="configuration.html" class="btn btn-neutral float-right" title="Configuração" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Velox Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

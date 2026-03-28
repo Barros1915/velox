@@ -1,0 +1,1329 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API Reference &mdash; Velox 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=c911a3e7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Arquivos Estáticos" href="static_files.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Velox
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Começando</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="project_structure.html">Estrutura do Projeto</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuração</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Routes e URLs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="routing.html">Rotas e Routing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Banco de Dados</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="database.html">Banco de Dados</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Templates</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">Templates</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Arquivos Estáticos</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="static_files.html">Arquivos Estáticos</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#velox-core">Velox Core</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#core-velox-framework">Core - Velox Framework</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#velox.core.Blueprint"><code class="docutils literal notranslate"><span class="pre">Blueprint</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#velox.core.MeuFramework"><code class="docutils literal notranslate"><span class="pre">MeuFramework</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#velox.core.RoutePattern"><code class="docutils literal notranslate"><span class="pre">RoutePattern</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.RoutePattern.__init__"><code class="docutils literal notranslate"><span class="pre">RoutePattern.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.RoutePattern.match"><code class="docutils literal notranslate"><span class="pre">RoutePattern.match()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#velox.core.Router"><code class="docutils literal notranslate"><span class="pre">Router</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.Router.__init__"><code class="docutils literal notranslate"><span class="pre">Router.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.Router.add_error_handler"><code class="docutils literal notranslate"><span class="pre">Router.add_error_handler()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.Router.add_route"><code class="docutils literal notranslate"><span class="pre">Router.add_route()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.Router.delete"><code class="docutils literal notranslate"><span class="pre">Router.delete()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.Router.get"><code class="docutils literal notranslate"><span class="pre">Router.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.Router.get_error_handler"><code class="docutils literal notranslate"><span class="pre">Router.get_error_handler()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.Router.list_routes"><code class="docutils literal notranslate"><span class="pre">Router.list_routes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.Router.match"><code class="docutils literal notranslate"><span class="pre">Router.match()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.Router.patch"><code class="docutils literal notranslate"><span class="pre">Router.patch()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.Router.post"><code class="docutils literal notranslate"><span class="pre">Router.post()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.Router.put"><code class="docutils literal notranslate"><span class="pre">Router.put()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.Router.resource"><code class="docutils literal notranslate"><span class="pre">Router.resource()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.Router.route"><code class="docutils literal notranslate"><span class="pre">Router.route()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.Router.websocket"><code class="docutils literal notranslate"><span class="pre">Router.websocket()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#velox.core.Velox"><code class="docutils literal notranslate"><span class="pre">Velox</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.Velox.__init__"><code class="docutils literal notranslate"><span class="pre">Velox.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.Velox.delete"><code class="docutils literal notranslate"><span class="pre">Velox.delete()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.Velox.error_handler"><code class="docutils literal notranslate"><span class="pre">Velox.error_handler()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.Velox.get"><code class="docutils literal notranslate"><span class="pre">Velox.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.Velox.include"><code class="docutils literal notranslate"><span class="pre">Velox.include()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.Velox.load_apps"><code class="docutils literal notranslate"><span class="pre">Velox.load_apps()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.Velox.not_found"><code class="docutils literal notranslate"><span class="pre">Velox.not_found()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.Velox.on_shutdown"><code class="docutils literal notranslate"><span class="pre">Velox.on_shutdown()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.Velox.on_startup"><code class="docutils literal notranslate"><span class="pre">Velox.on_startup()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.Velox.patch"><code class="docutils literal notranslate"><span class="pre">Velox.patch()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.Velox.post"><code class="docutils literal notranslate"><span class="pre">Velox.post()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.Velox.put"><code class="docutils literal notranslate"><span class="pre">Velox.put()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.Velox.render"><code class="docutils literal notranslate"><span class="pre">Velox.render()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.Velox.resource"><code class="docutils literal notranslate"><span class="pre">Velox.resource()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.Velox.route"><code class="docutils literal notranslate"><span class="pre">Velox.route()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.Velox.routes"><code class="docutils literal notranslate"><span class="pre">Velox.routes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.Velox.run"><code class="docutils literal notranslate"><span class="pre">Velox.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.Velox.server_error"><code class="docutils literal notranslate"><span class="pre">Velox.server_error()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.Velox.static"><code class="docutils literal notranslate"><span class="pre">Velox.static()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.Velox.template"><code class="docutils literal notranslate"><span class="pre">Velox.template()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.Velox.use"><code class="docutils literal notranslate"><span class="pre">Velox.use()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.Velox.websocket"><code class="docutils literal notranslate"><span class="pre">Velox.websocket()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#velox.core.WebSocket"><code class="docutils literal notranslate"><span class="pre">WebSocket</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.WebSocket.__init__"><code class="docutils literal notranslate"><span class="pre">WebSocket.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.WebSocket.accept"><code class="docutils literal notranslate"><span class="pre">WebSocket.accept()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.WebSocket.close"><code class="docutils literal notranslate"><span class="pre">WebSocket.close()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.WebSocket.closed"><code class="docutils literal notranslate"><span class="pre">WebSocket.closed</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.WebSocket.receive"><code class="docutils literal notranslate"><span class="pre">WebSocket.receive()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.WebSocket.receive_bytes"><code class="docutils literal notranslate"><span class="pre">WebSocket.receive_bytes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.WebSocket.receive_json"><code class="docutils literal notranslate"><span class="pre">WebSocket.receive_json()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.WebSocket.send"><code class="docutils literal notranslate"><span class="pre">WebSocket.send()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.core.WebSocket.send_json"><code class="docutils literal notranslate"><span class="pre">WebSocket.send_json()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#velox.core.create_app"><code class="docutils literal notranslate"><span class="pre">create_app()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-velox.request">Request</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#velox.request.Request"><code class="docutils literal notranslate"><span class="pre">Request</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#velox.request.Request.__init__"><code class="docutils literal notranslate"><span class="pre">Request.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.request.Request.accept_languages"><code class="docutils literal notranslate"><span class="pre">Request.accept_languages</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.request.Request.args"><code class="docutils literal notranslate"><span class="pre">Request.args</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.request.Request.base_url"><code class="docutils literal notranslate"><span class="pre">Request.base_url</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.request.Request.content_length"><code class="docutils literal notranslate"><span class="pre">Request.content_length</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.request.Request.content_type"><code class="docutils literal notranslate"><span class="pre">Request.content_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.request.Request.cookies"><code class="docutils literal notranslate"><span class="pre">Request.cookies</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.request.Request.data"><code class="docutils literal notranslate"><span class="pre">Request.data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.request.Request.form"><code class="docutils literal notranslate"><span class="pre">Request.form</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.request.Request.full_path"><code class="docutils literal notranslate"><span class="pre">Request.full_path</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.request.Request.get"><code class="docutils literal notranslate"><span class="pre">Request.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.request.Request.headers"><code class="docutils literal notranslate"><span class="pre">Request.headers</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.request.Request.host"><code class="docutils literal notranslate"><span class="pre">Request.host</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.request.Request.ip"><code class="docutils literal notranslate"><span class="pre">Request.ip</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.request.Request.is_ajax"><code class="docutils literal notranslate"><span class="pre">Request.is_ajax</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.request.Request.is_json"><code class="docutils literal notranslate"><span class="pre">Request.is_json</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.request.Request.is_secure"><code class="docutils literal notranslate"><span class="pre">Request.is_secure</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.request.Request.json"><code class="docutils literal notranslate"><span class="pre">Request.json</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.request.Request.language"><code class="docutils literal notranslate"><span class="pre">Request.language</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.request.Request.method"><code class="docutils literal notranslate"><span class="pre">Request.method</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.request.Request.path"><code class="docutils literal notranslate"><span class="pre">Request.path</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.request.Request.query_params"><code class="docutils literal notranslate"><span class="pre">Request.query_params</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.request.Request.referer"><code class="docutils literal notranslate"><span class="pre">Request.referer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.request.Request.remote_addr"><code class="docutils literal notranslate"><span class="pre">Request.remote_addr</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.request.Request.text"><code class="docutils literal notranslate"><span class="pre">Request.text</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.request.Request.url"><code class="docutils literal notranslate"><span class="pre">Request.url</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.request.Request.user_agent"><code class="docutils literal notranslate"><span class="pre">Request.user_agent</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-velox.response">Response</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#velox.response.Response"><code class="docutils literal notranslate"><span class="pre">Response</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#velox.response.Response.__init__"><code class="docutils literal notranslate"><span class="pre">Response.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.response.Response.body"><code class="docutils literal notranslate"><span class="pre">Response.body</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.response.Response.content_type"><code class="docutils literal notranslate"><span class="pre">Response.content_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.response.Response.delete_cookie"><code class="docutils literal notranslate"><span class="pre">Response.delete_cookie()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.response.Response.file"><code class="docutils literal notranslate"><span class="pre">Response.file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.response.Response.headers"><code class="docutils literal notranslate"><span class="pre">Response.headers</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.response.Response.html"><code class="docutils literal notranslate"><span class="pre">Response.html()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.response.Response.json"><code class="docutils literal notranslate"><span class="pre">Response.json()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.response.Response.location"><code class="docutils literal notranslate"><span class="pre">Response.location</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.response.Response.redirect"><code class="docutils literal notranslate"><span class="pre">Response.redirect()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.response.Response.send"><code class="docutils literal notranslate"><span class="pre">Response.send()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.response.Response.set_cookie"><code class="docutils literal notranslate"><span class="pre">Response.set_cookie()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.response.Response.set_header"><code class="docutils literal notranslate"><span class="pre">Response.set_header()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.response.Response.set_headers"><code class="docutils literal notranslate"><span class="pre">Response.set_headers()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.response.Response.status_code"><code class="docutils literal notranslate"><span class="pre">Response.status_code</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#velox.response.Response.text"><code class="docutils literal notranslate"><span class="pre">Response.text()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#router-blueprint">Router / Blueprint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#websocket">WebSocket</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id0"><code class="docutils literal notranslate"><span class="pre">WebSocket</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id5"><code class="docutils literal notranslate"><span class="pre">WebSocket.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6"><code class="docutils literal notranslate"><span class="pre">WebSocket.accept()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7"><code class="docutils literal notranslate"><span class="pre">WebSocket.close()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8"><code class="docutils literal notranslate"><span class="pre">WebSocket.closed</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id9"><code class="docutils literal notranslate"><span class="pre">WebSocket.receive()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10"><code class="docutils literal notranslate"><span class="pre">WebSocket.receive_bytes()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11"><code class="docutils literal notranslate"><span class="pre">WebSocket.receive_json()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id12"><code class="docutils literal notranslate"><span class="pre">WebSocket.send()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id13"><code class="docutils literal notranslate"><span class="pre">WebSocket.send_json()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#route-pattern">Route Pattern</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id14"><code class="docutils literal notranslate"><span class="pre">RoutePattern</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id15"><code class="docutils literal notranslate"><span class="pre">RoutePattern.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id16"><code class="docutils literal notranslate"><span class="pre">RoutePattern.match()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-functions">Module Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#velox.response.velox.core.load_env"><code class="docutils literal notranslate"><span class="pre">velox.core.load_env()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#constants">Constants</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#velox.response.velox.core.CONVERTERS"><code class="docutils literal notranslate"><span class="pre">velox.core.CONVERTERS</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#type-aliases">Type Aliases</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#velox.response.velox.core.MeuFramework"><code class="docutils literal notranslate"><span class="pre">velox.core.MeuFramework</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#velox.response.velox.core.Blueprint"><code class="docutils literal notranslate"><span class="pre">velox.core.Blueprint</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Velox</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">API Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/api.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="api-reference">
+<h1>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading"></a></h1>
+<p>This section documents the core Velox API.</p>
+<section id="velox-core">
+<h2>Velox Core<a class="headerlink" href="#velox-core" title="Link to this heading"></a></h2>
+<section id="core-velox-framework">
+<span id="module-velox.core"></span><h3>Core - Velox Framework<a class="headerlink" href="#core-velox-framework" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>Modos de execucao:</dt><dd><ol class="arabic simple">
+<li><p>WSGI/Threading  -&gt; app.run()              (sem deps, stdlib Python)</p></li>
+<li><dl class="simple">
+<dt>ASGI/uvicorn    -&gt; app.run(asgi=True)      (requer: pip install uvicorn)</dt><dd><p>-&gt; uvicorn meuapp:app      (CLI do uvicorn diretamente)</p>
+</dd>
+</dl>
+</li>
+</ol>
+</dd>
+</dl>
+<p>Rotas sync e async funcionam juntas no mesmo app:</p>
+<blockquote>
+<div><p>&#64;app.get(‘/’)
+def home(req, res):              # sync - igual ao antes</p>
+<blockquote>
+<div><p>return app.render(‘index.html’)</p>
+</div></blockquote>
+<p>&#64;app.get(‘/api/dados’)
+async def dados(req, res):       # async - roda no event loop</p>
+<blockquote>
+<div><p>resultado = await buscar()
+res.json(resultado)</p>
+</div></blockquote>
+<p>&#64;app.websocket(‘/ws/chat’)
+async def chat(ws):              # WebSocket (apenas ASGI)</p>
+<blockquote>
+<div><dl class="simple">
+<dt>while True:</dt><dd><p>msg = await ws.receive()
+if msg is None: break
+await ws.send(f’echo: {msg}’)</p>
+</dd>
+</dl>
+</div></blockquote>
+</div></blockquote>
+</section>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="velox.core.Blueprint">
+<span class="sig-prename descclassname"><span class="pre">velox.core.</span></span><span class="sig-name descname"><span class="pre">Blueprint</span></span><a class="headerlink" href="#velox.core.Blueprint" title="Link to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#velox.core.Router" title="velox.core.Router"><code class="xref py py-class docutils literal notranslate"><span class="pre">Router</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="velox.core.MeuFramework">
+<span class="sig-prename descclassname"><span class="pre">velox.core.</span></span><span class="sig-name descname"><span class="pre">MeuFramework</span></span><a class="headerlink" href="#velox.core.MeuFramework" title="Link to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#velox.core.Velox" title="velox.core.Velox"><code class="xref py py-class docutils literal notranslate"><span class="pre">Velox</span></code></a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="velox.core.RoutePattern">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">velox.core.</span></span><span class="sig-name descname"><span class="pre">RoutePattern</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#RoutePattern"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.RoutePattern" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.RoutePattern.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#RoutePattern.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.RoutePattern.__init__" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.RoutePattern.match">
+<span class="sig-name descname"><span class="pre">match</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><span class="pre">Dict</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="_modules/velox/core.html#RoutePattern.match"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.RoutePattern.match" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="velox.core.Router">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">velox.core.</span></span><span class="sig-name descname"><span class="pre">Router</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#Router"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.Router" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Router modular — use como Blueprint para separar rotas:</p>
+<blockquote>
+<div><p>api = Router()</p>
+<p>&#64;api.get(‘/users’)
+async def list_users(req, res):</p>
+<blockquote>
+<div><p>res.json(await User.all())</p>
+</div></blockquote>
+<p>app.include(api, prefix=’/api’)</p>
+</div></blockquote>
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.Router.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#Router.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.Router.__init__" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.Router.add_error_handler">
+<span class="sig-name descname"><span class="pre">add_error_handler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">handler</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><span class="pre">Callable</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#Router.add_error_handler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.Router.add_error_handler" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.Router.add_route">
+<span class="sig-name descname"><span class="pre">add_route</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">handler</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><span class="pre">Callable</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#Router.add_route"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.Router.add_route" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.Router.delete">
+<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#Router.delete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.Router.delete" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.Router.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#Router.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.Router.get" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.Router.get_error_handler">
+<span class="sig-name descname"><span class="pre">get_error_handler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><span class="pre">Callable</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="_modules/velox/core.html#Router.get_error_handler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.Router.get_error_handler" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.Router.list_routes">
+<span class="sig-name descname"><span class="pre">list_routes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.14)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><span class="pre">Dict</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/velox/core.html#Router.list_routes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.Router.list_routes" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.Router.match">
+<span class="sig-name descname"><span class="pre">match</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.14)"><span class="pre">Tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><span class="pre">Callable</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><span class="pre">Dict</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/velox/core.html#Router.match"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.Router.match" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.Router.patch">
+<span class="sig-name descname"><span class="pre">patch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#Router.patch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.Router.patch" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.Router.post">
+<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#Router.post"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.Router.post" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.Router.put">
+<span class="sig-name descname"><span class="pre">put</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#Router.put"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.Router.put" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.Router.resource">
+<span class="sig-name descname"><span class="pre">resource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#Router.resource"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.Router.resource" title="Link to this definition"></a></dt>
+<dd><p>Define múltiplos métodos HTTP para uma rota usando uma classe.</p>
+<dl>
+<dt>Uso:</dt><dd><p>&#64;app.resource(‘/api/produtos’)
+class Produtos:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>def get(req, res):</dt><dd><p>res.json({‘produtos’: []})
+return res</p>
+</dd>
+<dt>def post(req, res):</dt><dd><p>body = req.json or {}
+res.json({‘criado’: True, ‘dados’: body})
+return res</p>
+</dd>
+<dt>def put(req, res):</dt><dd><p>res.json({‘atualizado’: True})
+return res</p>
+</dd>
+<dt>def delete(req, res):</dt><dd><p>res.json({‘deletado’: True})
+return res</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.Router.route">
+<span class="sig-name descname"><span class="pre">route</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">methods</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.14)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#Router.route"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.Router.route" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.Router.websocket">
+<span class="sig-name descname"><span class="pre">websocket</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#Router.websocket"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.Router.websocket" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="velox.core.Velox">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">velox.core.</span></span><span class="sig-name descname"><span class="pre">Velox</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">import_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#Velox"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.Velox" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Velox - Fast Python Web Framework.</p>
+<dl class="simple">
+<dt>Modos:</dt><dd><p>app.run()            -&gt; WSGI threading (sem deps)
+app.run(asgi=True)   -&gt; ASGI uvicorn  (pip install uvicorn)
+uvicorn meuapp:app   -&gt; ASGI diretamente pelo CLI</p>
+</dd>
+</dl>
+<p>Exemplos rapidos:</p>
+<blockquote>
+<div><p>app = Velox(__name__)</p>
+<p>&#64;app.get(‘/’)
+def home(req, res):</p>
+<blockquote>
+<div><p>return app.render(‘index.html’, {‘nome’: ‘Mundo’})</p>
+</div></blockquote>
+<p>&#64;app.get(‘/api’)
+async def api(req, res):</p>
+<blockquote>
+<div><p>data = await meu_servico()
+res.json(data)</p>
+</div></blockquote>
+<p>&#64;app.websocket(‘/ws’)
+async def ws(ws):</p>
+<blockquote>
+<div><dl class="simple">
+<dt>while True:</dt><dd><p>msg = await ws.receive()
+if not msg: break
+await ws.send(f’echo: {msg}’)</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>&#64;app.on_startup
+async def init():</p>
+<blockquote>
+<div><p>await db.connect()</p>
+</div></blockquote>
+<p>app.run()           # WSGI
+app.run(asgi=True)  # ASGI</p>
+</div></blockquote>
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.Velox.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">import_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#Velox.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.Velox.__init__" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.Velox.delete">
+<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#Velox.delete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.Velox.delete" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.Velox.error_handler">
+<span class="sig-name descname"><span class="pre">error_handler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#Velox.error_handler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.Velox.error_handler" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.Velox.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#Velox.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.Velox.get" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.Velox.include">
+<span class="sig-name descname"><span class="pre">include</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">router</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#velox.core.Router" title="velox.core.Router"><span class="pre">Router</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#Velox.include"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.Velox.include" title="Link to this definition"></a></dt>
+<dd><p>Inclui um Blueprint/Router com prefixo</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.Velox.load_apps">
+<span class="sig-name descname"><span class="pre">load_apps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.14)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#Velox.load_apps"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.Velox.load_apps" title="Link to this definition"></a></dt>
+<dd><p>Carrega apps modulares (criados com velox startapp).</p>
+<dl class="simple">
+<dt>Uso:</dt><dd><p>app = Velox(__name__)
+app.load_apps([‘blog’, ‘api’, ‘usuarios’])</p>
+</dd>
+<dt>O sistema procura por:</dt><dd><ul class="simple">
+<li><p>{app}/views.py  -&gt; Registra routers/blueprints</p></li>
+<li><p>{app}/admin.py  -&gt; Registra no painel admin</p></li>
+<li><p>{app}/models.py -&gt; Importa models</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>app_names</strong> – Lista de nomes de apps. Se None, autodiscover todos.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.Velox.not_found">
+<span class="sig-name descname"><span class="pre">not_found</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><span class="pre">Callable</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#Velox.not_found"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.Velox.not_found" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.Velox.on_shutdown">
+<span class="sig-name descname"><span class="pre">on_shutdown</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><span class="pre">Callable</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#Velox.on_shutdown"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.Velox.on_shutdown" title="Link to this definition"></a></dt>
+<dd><p>Executado ao parar (apenas ASGI)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.Velox.on_startup">
+<span class="sig-name descname"><span class="pre">on_startup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><span class="pre">Callable</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#Velox.on_startup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.Velox.on_startup" title="Link to this definition"></a></dt>
+<dd><p>Executado ao iniciar (apenas ASGI)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.Velox.patch">
+<span class="sig-name descname"><span class="pre">patch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#Velox.patch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.Velox.patch" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.Velox.post">
+<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#Velox.post"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.Velox.post" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.Velox.put">
+<span class="sig-name descname"><span class="pre">put</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#Velox.put"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.Velox.put" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.Velox.render">
+<span class="sig-name descname"><span class="pre">render</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">template_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><span class="pre">Dict</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></span><a class="reference internal" href="_modules/velox/core.html#Velox.render"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.Velox.render" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.Velox.resource">
+<span class="sig-name descname"><span class="pre">resource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#Velox.resource"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.Velox.resource" title="Link to this definition"></a></dt>
+<dd><p>Define múltiplos métodos HTTP para uma rota usando uma classe</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.Velox.route">
+<span class="sig-name descname"><span class="pre">route</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">methods</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.14)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#Velox.route"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.Velox.route" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.Velox.routes">
+<span class="sig-name descname"><span class="pre">routes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.14)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><span class="pre">Dict</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/velox/core.html#Velox.routes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.Velox.routes" title="Link to this definition"></a></dt>
+<dd><p>Lista todas as rotas registradas</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.Velox.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asgi</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">workers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#Velox.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.Velox.run" title="Link to this definition"></a></dt>
+<dd><p>Inicia o servidor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>host</strong> – Host. Padrao: APP_HOST do .env ou ‘localhost’</p></li>
+<li><p><strong>port</strong> – Porta. Padrao: APP_PORT do .env ou 8000</p></li>
+<li><p><strong>debug</strong> – Modo debug. Padrao: APP_DEBUG do .env</p></li>
+<li><p><strong>asgi</strong> – True para uvicorn/ASGI  (requer: pip install uvicorn)
+False para WSGI/threading (sem deps)</p></li>
+<li><p><strong>workers</strong> – Numero de workers ASGI (default: 1)</p></li>
+<li><p><strong>reload</strong> – Auto-reload em mudancas de arquivo (dev ASGI)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.Velox.server_error">
+<span class="sig-name descname"><span class="pre">server_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><span class="pre">Callable</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#Velox.server_error"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.Velox.server_error" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.Velox.static">
+<span class="sig-name descname"><span class="pre">static</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'static'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#Velox.static"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.Velox.static" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.Velox.template">
+<span class="sig-name descname"><span class="pre">template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'templates'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#Velox.template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.Velox.template" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.Velox.use">
+<span class="sig-name descname"><span class="pre">use</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><span class="pre">Callable</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#Velox.use"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.Velox.use" title="Link to this definition"></a></dt>
+<dd><p>Adiciona middleware global (sync ou async).</p>
+<blockquote>
+<div><p>&#64;app.use
+async def cors(next_handler, req, res, <a href="#id1"><span class="problematic" id="id2">**</span></a>kw):</p>
+<blockquote>
+<div><p>res.set_header(‘Access-Control-Allow-Origin’, ‘*’)
+return await next_handler(req, res, <a href="#id3"><span class="problematic" id="id4">**</span></a>kw)</p>
+</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.Velox.websocket">
+<span class="sig-name descname"><span class="pre">websocket</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#Velox.websocket"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.Velox.websocket" title="Link to this definition"></a></dt>
+<dd><p>Rota WebSocket (apenas ASGI). Handler recebe ws: WebSocket</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="velox.core.WebSocket">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">velox.core.</span></span><span class="sig-name descname"><span class="pre">WebSocket</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scope</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><span class="pre">Dict</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">receive</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><span class="pre">Callable</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">send</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><span class="pre">Callable</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#WebSocket"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.WebSocket" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>WebSocket para rotas ASGI.</p>
+<dl>
+<dt>Uso:</dt><dd><p>&#64;app.websocket(‘/ws/chat’)
+async def chat(ws):</p>
+<blockquote>
+<div><dl class="simple">
+<dt>while True:</dt><dd><p>msg = await ws.receive()
+if msg is None: break
+await ws.send(f’echo: {msg}’)</p>
+</dd>
+</dl>
+</div></blockquote>
+<p># JSON helpers:
+data = await ws.receive_json()
+await ws.send_json({‘status’: ‘ok’})</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.WebSocket.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scope</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><span class="pre">Dict</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">receive</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><span class="pre">Callable</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">send</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><span class="pre">Callable</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#WebSocket.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.WebSocket.__init__" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.WebSocket.accept">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">accept</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subprotocol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#WebSocket.accept"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.WebSocket.accept" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.WebSocket.close">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#WebSocket.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.WebSocket.close" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="velox.core.WebSocket.closed">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">closed</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><a class="headerlink" href="#velox.core.WebSocket.closed" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.WebSocket.receive">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">receive</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="_modules/velox/core.html#WebSocket.receive"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.WebSocket.receive" title="Link to this definition"></a></dt>
+<dd><p>Recebe mensagem de texto. Retorna None se conexao fechada.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.WebSocket.receive_bytes">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">receive_bytes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.14)"><span class="pre">bytes</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="_modules/velox/core.html#WebSocket.receive_bytes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.WebSocket.receive_bytes" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.WebSocket.receive_json">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">receive_json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="_modules/velox/core.html#WebSocket.receive_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.WebSocket.receive_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.WebSocket.send">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">send</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#WebSocket.send"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.WebSocket.send" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.core.WebSocket.send_json">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">send_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#WebSocket.send_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.WebSocket.send_json" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="velox.core.create_app">
+<span class="sig-prename descclassname"><span class="pre">velox.core.</span></span><span class="sig-name descname"><span class="pre">create_app</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#velox.core.Velox" title="velox.core.Velox"><span class="pre">Velox</span></a></span></span><a class="reference internal" href="_modules/velox/core.html#create_app"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.core.create_app" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-velox.request">
+<span id="request"></span><h2>Request<a class="headerlink" href="#module-velox.request" title="Link to this heading"></a></h2>
+<p>Request - Velox Framework
+Representa uma requisicao HTTP recebida pelo servidor.</p>
+<dl class="simple">
+<dt>Propriedades disponiveis:</dt><dd><p>request.method          -&gt; ‘GET’, ‘POST’, etc
+request.path            -&gt; ‘/api/produtos’
+request.ip              -&gt; IP real do cliente
+request.host            -&gt; host da requisicao
+request.headers         -&gt; dict de headers
+request.args            -&gt; query params (?page=1)
+request.form            -&gt; dados de formulario POST
+request.json            -&gt; body JSON
+request.data            -&gt; body raw bytes
+request.files           -&gt; arquivos enviados
+request.cookies         -&gt; cookies da requisicao
+request.is_ajax         -&gt; True se for requisicao XHR
+request.is_secure       -&gt; True se for HTTPS
+request.user_agent      -&gt; user agent do navegador
+request.referer         -&gt; pagina de origem
+request.content_type    -&gt; Content-Type do body
+request.content_length  -&gt; tamanho do body</p>
+</dd>
+</dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="velox.request.Request">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">velox.request.</span></span><span class="sig-name descname"><span class="pre">Request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">handler</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/request.html#Request"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.request.Request" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Objeto de requisicao HTTP — disponivel em todo handler como primeiro parametro.</p>
+<dl>
+<dt>Uso:</dt><dd><p>&#64;app.get(‘/api/info’)
+def info(request, response):</p>
+<blockquote>
+<div><p>print(request.ip)          # IP do cliente
+print(request.method)      # GET
+print(request.path)        # /api/info
+print(request.args)        # query params
+print(request.form)        # form POST
+print(request.json)        # body JSON
+print(request.cookies)     # cookies</p>
+</div></blockquote>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.request.Request.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">handler</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/request.html#Request.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.request.Request.__init__" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="velox.request.Request.accept_languages">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">accept_languages</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a></span><a class="headerlink" href="#velox.request.Request.accept_languages" title="Link to this definition"></a></dt>
+<dd><p>[‘pt-BR’, ‘pt’, ‘en’]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Idiomas aceitos pelo cliente</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="velox.request.Request.args">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">args</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a></span><a class="headerlink" href="#velox.request.Request.args" title="Link to this definition"></a></dt>
+<dd><p>Parametros da query string (?chave=valor).</p>
+<dl class="simple">
+<dt>Uso:</dt><dd><p># URL: /buscar?q=notebook&amp;page=2
+q    = request.args.get(‘q’)      # ‘notebook’
+page = request.args.get(‘page’, ‘1’)  # ‘2’</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="velox.request.Request.base_url">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">base_url</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><a class="headerlink" href="#velox.request.Request.base_url" title="Link to this definition"></a></dt>
+<dd><p>//meusite.com/api/produto’</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>URL sem query string</p>
+</dd>
+<dt class="field-even">Type<span class="colon">:</span></dt>
+<dd class="field-even"><p>‘http</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="velox.request.Request.content_length">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">content_length</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#velox.request.Request.content_length" title="Link to this definition"></a></dt>
+<dd><p>Tamanho do body em bytes</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="velox.request.Request.content_type">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">content_type</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><a class="headerlink" href="#velox.request.Request.content_type" title="Link to this definition"></a></dt>
+<dd><p>‘application/json’, ‘multipart/form-data’, etc</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Content-Type do body</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="velox.request.Request.cookies">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">cookies</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a></span><a class="headerlink" href="#velox.request.Request.cookies" title="Link to this definition"></a></dt>
+<dd><p>Cookies da requisicao como dict.</p>
+<dl class="simple">
+<dt>Uso:</dt><dd><p>token    = request.cookies.get(‘token’)
+sessao   = request.cookies.get(‘session_id’)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="velox.request.Request.data">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">data</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.14)"><span class="pre">bytes</span></a></span><a class="headerlink" href="#velox.request.Request.data" title="Link to this definition"></a></dt>
+<dd><p>Body raw da requisicao em bytes</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="velox.request.Request.form">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">form</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a></span><a class="headerlink" href="#velox.request.Request.form" title="Link to this definition"></a></dt>
+<dd><p>Dados de formulario HTML (application/x-www-form-urlencoded).</p>
+<dl class="simple">
+<dt>Uso:</dt><dd><p>nome  = request.form.get(‘nome’)
+email = request.form.get(‘email’)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="velox.request.Request.full_path">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">full_path</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><a class="headerlink" href="#velox.request.Request.full_path" title="Link to this definition"></a></dt>
+<dd><p>/api/produto?page=1</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Caminho completo com query string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.request.Request.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/request.html#Request.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.request.Request.get" title="Link to this definition"></a></dt>
+<dd><p>Busca valor em args ou form</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="velox.request.Request.headers">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">headers</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a></span><a class="headerlink" href="#velox.request.Request.headers" title="Link to this definition"></a></dt>
+<dd><p>Headers da requisicao (case-insensitive)</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="velox.request.Request.host">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">host</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><a class="headerlink" href="#velox.request.Request.host" title="Link to this definition"></a></dt>
+<dd><p>8000’</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Host da requisicao</p>
+</dd>
+<dt class="field-even">Type<span class="colon">:</span></dt>
+<dd class="field-even"><p>‘meusite.com’ ou ‘localhost</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="velox.request.Request.ip">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">ip</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><a class="headerlink" href="#velox.request.Request.ip" title="Link to this definition"></a></dt>
+<dd><p>IP real do cliente.
+Funciona corretamente atras de nginx/proxy/load balancer.</p>
+<dl class="simple">
+<dt>Uso:</dt><dd><p>print(request.ip)   # ‘177.92.10.45’</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="velox.request.Request.is_ajax">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">is_ajax</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><a class="headerlink" href="#velox.request.Request.is_ajax" title="Link to this definition"></a></dt>
+<dd><p>True se a requisicao foi feita via JavaScript (fetch/XHR).</p>
+<dl class="simple">
+<dt>Uso:</dt><dd><dl class="simple">
+<dt>if request.is_ajax:</dt><dd><p>response.json({‘ok’: True})</p>
+</dd>
+<dt>else:</dt><dd><p>return app.render(‘pagina.html’)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="velox.request.Request.is_json">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">is_json</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><a class="headerlink" href="#velox.request.Request.is_json" title="Link to this definition"></a></dt>
+<dd><p>True se o Content-Type for application/json</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="velox.request.Request.is_secure">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">is_secure</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><a class="headerlink" href="#velox.request.Request.is_secure" title="Link to this definition"></a></dt>
+<dd><p>True se a requisicao veio via HTTPS</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="velox.request.Request.json">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">json</span></span><a class="headerlink" href="#velox.request.Request.json" title="Link to this definition"></a></dt>
+<dd><p>Body da requisicao como dict/list Python (application/json).</p>
+<dl class="simple">
+<dt>Uso:</dt><dd><p>dados = request.json
+nome  = dados.get(‘nome’)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="velox.request.Request.language">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">language</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><a class="headerlink" href="#velox.request.Request.language" title="Link to this definition"></a></dt>
+<dd><p>‘pt-BR’</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Primeiro idioma aceito pelo cliente</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="velox.request.Request.method">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">method</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><a class="headerlink" href="#velox.request.Request.method" title="Link to this definition"></a></dt>
+<dd><p>GET, POST, PUT, DELETE, PATCH</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Metodo HTTP</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="velox.request.Request.path">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">path</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><a class="headerlink" href="#velox.request.Request.path" title="Link to this definition"></a></dt>
+<dd><p>/api/produto</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Caminho da URL sem query string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="velox.request.Request.query_params">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">query_params</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a></span><a class="headerlink" href="#velox.request.Request.query_params" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="velox.request.Request.referer">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">referer</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><a class="headerlink" href="#velox.request.Request.referer" title="Link to this definition"></a></dt>
+<dd><p>URL da pagina de origem (Referer header)</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="velox.request.Request.remote_addr">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">remote_addr</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><a class="headerlink" href="#velox.request.Request.remote_addr" title="Link to this definition"></a></dt>
+<dd><p>Alias para .ip — compatibilidade com Flask</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="velox.request.Request.text">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">text</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><a class="headerlink" href="#velox.request.Request.text" title="Link to this definition"></a></dt>
+<dd><p>Body da requisicao como string UTF-8</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="velox.request.Request.url">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">url</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><a class="headerlink" href="#velox.request.Request.url" title="Link to this definition"></a></dt>
+<dd><p>//meusite.com/api/produto?page=1’</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>URL completa</p>
+</dd>
+<dt class="field-even">Type<span class="colon">:</span></dt>
+<dd class="field-even"><p>‘http</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="velox.request.Request.user_agent">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">user_agent</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><a class="headerlink" href="#velox.request.Request.user_agent" title="Link to this definition"></a></dt>
+<dd><p>User-Agent do navegador/cliente</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-velox.response">
+<span id="response"></span><h2>Response<a class="headerlink" href="#module-velox.response" title="Link to this heading"></a></h2>
+<p>Módulo Response - Manipulação de respostas HTTP</p>
+<p>Type hints adicionados para melhorar IntelliSense e experiência do desenvolvedor.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="velox.response.Response">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">velox.response.</span></span><span class="sig-name descname"><span class="pre">Response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.14)"><span class="pre">bytes</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">status_code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/response.html#Response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.response.Response" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Classe que representa uma resposta HTTP</p>
+<p>Fornece métodos fácil para retornar diferentes tipos de resposta:
+- HTML
+- JSON
+- Texto
+- Arquivos</p>
+<dl>
+<dt>Uso:</dt><dd><p>&#64;app.get(‘/’)
+def home(req, res):</p>
+<blockquote>
+<div><p>return res.html(‘&lt;h1&gt;Olá Mundo&lt;/h1&gt;’)</p>
+</div></blockquote>
+<p>&#64;app.get(‘/api/dados’)
+def api(req, res):</p>
+<blockquote>
+<div><p>return res.json({‘status’: ‘ok’, ‘data’: []})</p>
+</div></blockquote>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.response.Response.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.14)"><span class="pre">bytes</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">status_code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/response.html#Response.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.response.Response.__init__" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="velox.response.Response.body">
+<span class="sig-name descname"><span class="pre">body</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.14)"><span class="pre">bytes</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><a class="headerlink" href="#velox.response.Response.body" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="velox.response.Response.content_type">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">content_type</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><a class="headerlink" href="#velox.response.Response.content_type" title="Link to this definition"></a></dt>
+<dd><p>Retorna o Content-Type da resposta</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.response.Response.delete_cookie">
+<span class="sig-name descname"><span class="pre">delete_cookie</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'/'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#velox.response.Response" title="velox.response.Response"><span class="pre">Response</span></a></span></span><a class="reference internal" href="_modules/velox/response.html#Response.delete_cookie"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.response.Response.delete_cookie" title="Link to this definition"></a></dt>
+<dd><p>Remove um cookie definindo expiração no passado</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.response.Response.file">
+<span class="sig-name descname"><span class="pre">file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">content_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#velox.response.Response" title="velox.response.Response"><span class="pre">Response</span></a></span></span><a class="reference internal" href="_modules/velox/response.html#Response.file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.response.Response.file" title="Link to this definition"></a></dt>
+<dd><p>Retorna um arquivo para download</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="velox.response.Response.headers">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">headers</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#velox.response.Response.headers" title="Link to this definition"></a></dt>
+<dd><p>Retorna os headers da resposta</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.response.Response.html">
+<span class="sig-name descname"><span class="pre">html</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">html_content</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">status_code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">200</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#velox.response.Response" title="velox.response.Response"><span class="pre">Response</span></a></span></span><a class="reference internal" href="_modules/velox/response.html#Response.html"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.response.Response.html" title="Link to this definition"></a></dt>
+<dd><p>Retorna conteúdo HTML</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.response.Response.json">
+<span class="sig-name descname"><span class="pre">json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">status_code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">200</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#velox.response.Response" title="velox.response.Response"><span class="pre">Response</span></a></span></span><a class="reference internal" href="_modules/velox/response.html#Response.json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.response.Response.json" title="Link to this definition"></a></dt>
+<dd><p>Retorna dados JSON</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="velox.response.Response.location">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">location</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><a class="headerlink" href="#velox.response.Response.location" title="Link to this definition"></a></dt>
+<dd><p>Retorna o header Location (para redirects)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.response.Response.redirect">
+<span class="sig-name descname"><span class="pre">redirect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">status_code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">302</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#velox.response.Response" title="velox.response.Response"><span class="pre">Response</span></a></span></span><a class="reference internal" href="_modules/velox/response.html#Response.redirect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.response.Response.redirect" title="Link to this definition"></a></dt>
+<dd><p>Redireciona para outra URL</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.response.Response.send">
+<span class="sig-name descname"><span class="pre">send</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">content</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">status_code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">200</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#velox.response.Response" title="velox.response.Response"><span class="pre">Response</span></a></span></span><a class="reference internal" href="_modules/velox/response.html#Response.send"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.response.Response.send" title="Link to this definition"></a></dt>
+<dd><p>Envia conteúdo genérico como texto</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.response.Response.set_cookie">
+<span class="sig-name descname"><span class="pre">set_cookie</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">expires</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">secure</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">httponly</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samesite</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#velox.response.Response" title="velox.response.Response"><span class="pre">Response</span></a></span></span><a class="reference internal" href="_modules/velox/response.html#Response.set_cookie"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.response.Response.set_cookie" title="Link to this definition"></a></dt>
+<dd><p>Define um cookie na resposta.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Nome do cookie</p></li>
+<li><p><strong>value</strong> – Valor do cookie</p></li>
+<li><p><strong>expires</strong> – Tempo de expiração em segundos</p></li>
+<li><p><strong>path</strong> – Caminho do cookie</p></li>
+<li><p><strong>secure</strong> – HTTPS only</p></li>
+<li><p><strong>httponly</strong> – Inacessível via JavaScript</p></li>
+<li><p><strong>samesite</strong> – Política SameSite (‘Strict’, ‘Lax’, ‘None’)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.response.Response.set_header">
+<span class="sig-name descname"><span class="pre">set_header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#velox.response.Response" title="velox.response.Response"><span class="pre">Response</span></a></span></span><a class="reference internal" href="_modules/velox/response.html#Response.set_header"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.response.Response.set_header" title="Link to this definition"></a></dt>
+<dd><p>Define um header específico. Retorna self para chaining.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.response.Response.set_headers">
+<span class="sig-name descname"><span class="pre">set_headers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#velox.response.Response" title="velox.response.Response"><span class="pre">Response</span></a></span></span><a class="reference internal" href="_modules/velox/response.html#Response.set_headers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.response.Response.set_headers" title="Link to this definition"></a></dt>
+<dd><p>Define múltiplos headers de uma vez. Retorna self para chaining.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="velox.response.Response.status_code">
+<span class="sig-name descname"><span class="pre">status_code</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="headerlink" href="#velox.response.Response.status_code" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="velox.response.Response.text">
+<span class="sig-name descname"><span class="pre">text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">content</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">status_code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">200</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#velox.response.Response" title="velox.response.Response"><span class="pre">Response</span></a></span></span><a class="reference internal" href="_modules/velox/response.html#Response.text"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#velox.response.Response.text" title="Link to this definition"></a></dt>
+<dd><p>Retorna texto puro</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="router-blueprint">
+<h2>Router / Blueprint<a class="headerlink" href="#router-blueprint" title="Link to this heading"></a></h2>
+</section>
+<section id="websocket">
+<h2>WebSocket<a class="headerlink" href="#websocket" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="id0">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">velox.core.</span></span><span class="sig-name descname"><span class="pre">WebSocket</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scope</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><span class="pre">Dict</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">receive</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><span class="pre">Callable</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">send</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><span class="pre">Callable</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#WebSocket"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>WebSocket para rotas ASGI.</p>
+<dl>
+<dt>Uso:</dt><dd><p>&#64;app.websocket(‘/ws/chat’)
+async def chat(ws):</p>
+<blockquote>
+<div><dl class="simple">
+<dt>while True:</dt><dd><p>msg = await ws.receive()
+if msg is None: break
+await ws.send(f’echo: {msg}’)</p>
+</dd>
+</dl>
+</div></blockquote>
+<p># JSON helpers:
+data = await ws.receive_json()
+await ws.send_json({‘status’: ‘ok’})</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="id5">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scope</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><span class="pre">Dict</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">receive</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><span class="pre">Callable</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">send</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.14)"><span class="pre">Callable</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#WebSocket.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id5" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id6">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">accept</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subprotocol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#WebSocket.accept"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id6" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id7">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#WebSocket.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id7" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="id8">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">closed</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><a class="headerlink" href="#id8" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id9">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">receive</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="_modules/velox/core.html#WebSocket.receive"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id9" title="Link to this definition"></a></dt>
+<dd><p>Recebe mensagem de texto. Retorna None se conexao fechada.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id10">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">receive_bytes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.14)"><span class="pre">bytes</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="_modules/velox/core.html#WebSocket.receive_bytes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id10" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id11">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">receive_json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="_modules/velox/core.html#WebSocket.receive_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id11" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id12">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">send</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#WebSocket.send"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id12" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id13">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">send_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><span class="pre">Any</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#WebSocket.send_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id13" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="route-pattern">
+<h2>Route Pattern<a class="headerlink" href="#route-pattern" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="id14">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">velox.core.</span></span><span class="sig-name descname"><span class="pre">RoutePattern</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#RoutePattern"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id14" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="id15">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/velox/core.html#RoutePattern.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id15" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id16">
+<span class="sig-name descname"><span class="pre">match</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.14)"><span class="pre">Dict</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="_modules/velox/core.html#RoutePattern.match"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id16" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-functions">
+<h2>Module Functions<a class="headerlink" href="#module-functions" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="velox.response.velox.core.load_env">
+<span class="sig-prename descclassname"><span class="pre">velox.core.</span></span><span class="sig-name descname"><span class="pre">load_env</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.env'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#velox.response.velox.core.load_env" title="Link to this definition"></a></dt>
+<dd><p>Loads environment variables from a <cite>.env</cite> file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><em>str</em></a>) – Path to the .env file</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#FileNotFoundError" title="(in Python v3.14)"><strong>FileNotFoundError</strong></a> – If the file doesn’t exist</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">velox</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">load_env</span><span class="p">(</span><span class="s1">&#39;.env.prod&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="constants">
+<h2>Constants<a class="headerlink" href="#constants" title="Link to this heading"></a></h2>
+<dl class="py data">
+<dt class="sig sig-object py" id="velox.response.velox.core.CONVERTERS">
+<span class="sig-prename descclassname"><span class="pre">velox.core.</span></span><span class="sig-name descname"><span class="pre">CONVERTERS</span></span><a class="headerlink" href="#velox.response.velox.core.CONVERTERS" title="Link to this definition"></a></dt>
+<dd><p>Dictionary of URL parameter converters.</p>
+</dd></dl>
+
+</section>
+<section id="type-aliases">
+<h2>Type Aliases<a class="headerlink" href="#type-aliases" title="Link to this heading"></a></h2>
+<dl class="py data">
+<dt class="sig sig-object py" id="velox.response.velox.core.MeuFramework">
+<span class="sig-prename descclassname"><span class="pre">velox.core.</span></span><span class="sig-name descname"><span class="pre">MeuFramework</span></span><a class="headerlink" href="#velox.response.velox.core.MeuFramework" title="Link to this definition"></a></dt>
+<dd><p>Alias for <a class="reference internal" href="#velox.core.Velox" title="velox.core.Velox"><code class="xref py py-class docutils literal notranslate"><span class="pre">velox.core.Velox</span></code></a> (for backwards compatibility).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">velox</span><span class="w"> </span><span class="kn">import</span> <span class="n">MeuFramework</span>
+</pre></div>
+</div>
+<p>is equivalent to:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">velox</span><span class="w"> </span><span class="kn">import</span> <span class="n">Velox</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="velox.response.velox.core.Blueprint">
+<span class="sig-prename descclassname"><span class="pre">velox.core.</span></span><span class="sig-name descname"><span class="pre">Blueprint</span></span><a class="headerlink" href="#velox.response.velox.core.Blueprint" title="Link to this definition"></a></dt>
+<dd><p>Alias for <a class="reference internal" href="#velox.core.Router" title="velox.core.Router"><code class="xref py py-class docutils literal notranslate"><span class="pre">velox.core.Router</span></code></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">velox</span><span class="w"> </span><span class="kn">import</span> <span class="n">Blueprint</span>
+</pre></div>
+</div>
+<p>is equivalent to:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">velox</span><span class="w"> </span><span class="kn">import</span> <span class="n">Router</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="static_files.html" class="btn btn-neutral float-left" title="Arquivos Estáticos" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Velox Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

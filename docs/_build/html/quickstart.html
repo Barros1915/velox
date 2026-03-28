@@ -1,0 +1,458 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quickstart &mdash; Velox 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=c911a3e7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Estrutura do Projeto" href="project_structure.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Velox
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Começando</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#basic-app">Basic App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rendering-templates">Rendering Templates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#json-api">JSON API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#route-parameters">Route Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#post-requests">POST Requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#async-handlers">Async Handlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#blueprints">Blueprints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#middleware">Middleware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#asgi-mode">ASGI Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#websocket">WebSocket</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#error-handlers">Error Handlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#static-files">Static Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#environment-variables">Environment Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="project_structure.html">Estrutura do Projeto</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuração</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Routes e URLs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="routing.html">Rotas e Routing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Banco de Dados</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="database.html">Banco de Dados</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Templates</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">Templates</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Arquivos Estáticos</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="static_files.html">Arquivos Estáticos</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Velox</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Quickstart</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/quickstart.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="quickstart">
+<h1>Quickstart<a class="headerlink" href="#quickstart" title="Link to this heading"></a></h1>
+<p>This guide will get you up and running with Velox in minutes.</p>
+<section id="basic-app">
+<h2>Basic App<a class="headerlink" href="#basic-app" title="Link to this heading"></a></h2>
+<p>Create a file <code class="docutils literal notranslate"><span class="pre">app.py</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">velox</span><span class="w"> </span><span class="kn">import</span> <span class="n">Velox</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Velox</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">home</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">res</span><span class="p">):</span>
+    <span class="n">res</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="s1">&#39;Hello, World!&#39;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Run it:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>app.py
+</pre></div>
+</div>
+<p>Server running at <a class="reference external" href="http://localhost:8000">http://localhost:8000</a></p>
+</section>
+<section id="rendering-templates">
+<h2>Rendering Templates<a class="headerlink" href="#rendering-templates" title="Link to this heading"></a></h2>
+<p>Create a template file <code class="docutils literal notranslate"><span class="pre">templates/index.html</span></code>:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>{{ title }}<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Hello, {{ name }}!<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>Update your app:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">velox</span><span class="w"> </span><span class="kn">import</span> <span class="n">Velox</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Velox</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">template</span><span class="p">(</span><span class="s1">&#39;templates&#39;</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">home</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">res</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">app</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s1">&#39;index.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Home&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;World&#39;</span><span class="p">})</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="json-api">
+<h2>JSON API<a class="headerlink" href="#json-api" title="Link to this heading"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">velox</span><span class="w"> </span><span class="kn">import</span> <span class="n">Velox</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Velox</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/api/users&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">list_users</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">res</span><span class="p">):</span>
+    <span class="n">users</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Alice&#39;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Bob&#39;</span><span class="p">},</span>
+    <span class="p">]</span>
+    <span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">(</span><span class="n">users</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="route-parameters">
+<h2>Route Parameters<a class="headerlink" href="#route-parameters" title="Link to this heading"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">velox</span><span class="w"> </span><span class="kn">import</span> <span class="n">Velox</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Velox</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/user/&lt;int:user_id&gt;&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_user</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">user_id</span><span class="p">):</span>
+    <span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">({</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">user_id</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;User </span><span class="si">{</span><span class="n">user_id</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">})</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Supported converters:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;int:id&gt;</span></code> — Integer</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;float:value&gt;</span></code> — Float</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;str:name&gt;</span></code> — String</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;slug:slug&gt;</span></code> — URL slug</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;uuid:id&gt;</span></code> — UUID</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;path:path&gt;</span></code> — File path</p></li>
+</ul>
+</section>
+<section id="post-requests">
+<h2>POST Requests<a class="headerlink" href="#post-requests" title="Link to this heading"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">velox</span><span class="w"> </span><span class="kn">import</span> <span class="n">Velox</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Velox</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/api/data&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">handle_post</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">res</span><span class="p">):</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">json</span>
+    <span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">({</span><span class="s1">&#39;received&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">})</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="async-handlers">
+<h2>Async Handlers<a class="headerlink" href="#async-handlers" title="Link to this heading"></a></h2>
+<p>Velox supports both sync and async handlers in the same app:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">velox</span><span class="w"> </span><span class="kn">import</span> <span class="n">Velox</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Velox</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="c1"># Sync handler</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/sync&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sync_handler</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">res</span><span class="p">):</span>
+    <span class="n">res</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="s1">&#39;Sync response&#39;</span><span class="p">)</span>
+
+<span class="c1"># Async handler</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/async&#39;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">async_handler</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">res</span><span class="p">):</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
+    <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+    <span class="n">res</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="s1">&#39;Async response&#39;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="blueprints">
+<h2>Blueprints<a class="headerlink" href="#blueprints" title="Link to this heading"></a></h2>
+<p>Organize routes with Blueprints:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">velox</span><span class="w"> </span><span class="kn">import</span> <span class="n">Velox</span><span class="p">,</span> <span class="n">Router</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Velox</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="c1"># Create a Blueprint</span>
+<span class="n">api</span> <span class="o">=</span> <span class="n">Router</span><span class="p">()</span>
+
+<span class="nd">@api</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/users&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">list_users</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">res</span><span class="p">):</span>
+    <span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">([</span><span class="s1">&#39;alice&#39;</span><span class="p">,</span> <span class="s1">&#39;bob&#39;</span><span class="p">])</span>
+
+<span class="nd">@api</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/posts&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">list_posts</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">res</span><span class="p">):</span>
+    <span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">([</span><span class="s1">&#39;post1&#39;</span><span class="p">,</span> <span class="s1">&#39;post2&#39;</span><span class="p">])</span>
+
+<span class="c1"># Register with prefix</span>
+<span class="n">app</span><span class="o">.</span><span class="n">include</span><span class="p">(</span><span class="n">api</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;/api&#39;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Now routes are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">/api/users</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/api/posts</span></code></p></li>
+</ul>
+</section>
+<section id="middleware">
+<h2>Middleware<a class="headerlink" href="#middleware" title="Link to this heading"></a></h2>
+<p>Add global middleware:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">velox</span><span class="w"> </span><span class="kn">import</span> <span class="n">Velox</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Velox</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">use</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">log_middleware</span><span class="p">(</span><span class="n">next_handler</span><span class="p">,</span> <span class="n">req</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Request: </span><span class="si">{</span><span class="n">req</span><span class="o">.</span><span class="n">method</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">req</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">next_handler</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">home</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">res</span><span class="p">):</span>
+    <span class="n">res</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="s1">&#39;Home&#39;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="asgi-mode">
+<h2>ASGI Mode<a class="headerlink" href="#asgi-mode" title="Link to this heading"></a></h2>
+<p>Run with uvicorn for async support:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>velox-framework<span class="o">[</span>asgi<span class="o">]</span>
+</pre></div>
+</div>
+<p>Then run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uvicorn<span class="w"> </span>app:app<span class="w"> </span>--reload
+</pre></div>
+</div>
+<p>Or in your app:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">velox</span><span class="w"> </span><span class="kn">import</span> <span class="n">Velox</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Velox</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">home</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">res</span><span class="p">):</span>
+    <span class="n">res</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="s1">&#39;Hello!&#39;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">asgi</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Uses uvicorn</span>
+</pre></div>
+</div>
+</section>
+<section id="websocket">
+<h2>WebSocket<a class="headerlink" href="#websocket" title="Link to this heading"></a></h2>
+<p>WebSocket routes (ASGI only):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">velox</span><span class="w"> </span><span class="kn">import</span> <span class="n">Velox</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Velox</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">websocket</span><span class="p">(</span><span class="s1">&#39;/ws/chat&#39;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">chat</span><span class="p">(</span><span class="n">ws</span><span class="p">):</span>
+    <span class="k">await</span> <span class="n">ws</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="k">await</span> <span class="n">ws</span><span class="o">.</span><span class="n">receive</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">msg</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="k">await</span> <span class="n">ws</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;echo: </span><span class="si">{</span><span class="n">msg</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">asgi</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Client example:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">ws</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">WebSocket</span><span class="p">(</span><span class="s1">&#39;ws://localhost:8000/ws/chat&#39;</span><span class="p">);</span>
+<span class="nx">ws</span><span class="p">.</span><span class="nx">onmessage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">event</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+<span class="nx">ws</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;Hello&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="error-handlers">
+<h2>Error Handlers<a class="headerlink" href="#error-handlers" title="Link to this heading"></a></h2>
+<p>Custom error pages:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">velox</span><span class="w"> </span><span class="kn">import</span> <span class="n">Velox</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Velox</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">not_found</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">not_found</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">res</span><span class="p">):</span>
+    <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">=</span> <span class="mi">404</span>
+    <span class="n">res</span><span class="o">.</span><span class="n">html</span><span class="p">(</span><span class="s1">&#39;&lt;h1&gt;404 - Page not found&lt;/h1&gt;&#39;</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">server_error</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">error</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">res</span><span class="p">):</span>
+    <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">=</span> <span class="mi">500</span>
+    <span class="n">res</span><span class="o">.</span><span class="n">html</span><span class="p">(</span><span class="s1">&#39;&lt;h1&gt;500 - Internal error&lt;/h1&gt;&#39;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="static-files">
+<h2>Static Files<a class="headerlink" href="#static-files" title="Link to this heading"></a></h2>
+<p>Serve static files:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">velox</span><span class="w"> </span><span class="kn">import</span> <span class="n">Velox</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Velox</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">static</span><span class="p">(</span><span class="s1">&#39;static&#39;</span><span class="p">)</span>  <span class="c1"># Serve from &#39;static&#39; folder</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">home</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">res</span><span class="p">):</span>
+    <span class="n">res</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="s1">&#39;Go to /static/style.css&#39;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Files in <code class="docutils literal notranslate"><span class="pre">static/</span></code> are served at <code class="docutils literal notranslate"><span class="pre">/static/filename</span></code>.</p>
+</section>
+<section id="environment-variables">
+<h2>Environment Variables<a class="headerlink" href="#environment-variables" title="Link to this heading"></a></h2>
+<p>Create a <code class="docutils literal notranslate"><span class="pre">.env</span></code> file:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>APP_HOST=localhost
+APP_PORT=8000
+APP_DEBUG=true
+</pre></div>
+</div>
+<p>Load it automatically:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># .env is loaded automatically</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">velox</span><span class="w"> </span><span class="kn">import</span> <span class="n">Velox</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Velox</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">home</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">res</span><span class="p">):</span>
+    <span class="n">res</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="s1">&#39;Hello!&#39;</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>  <span class="c1"># Uses .env values</span>
+</pre></div>
+</div>
+</section>
+<section id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Read the <a class="reference internal" href="api.html"><span class="doc">API Reference</span></a> reference</p></li>
+<li><p>Learn about <a class="reference internal" href="templates.html"><span class="doc">Templates</span></a></p></li>
+<li><p>Explore <span class="xref std std-doc">middleware</span> and <span class="xref std std-doc">websocket</span></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="project_structure.html" class="btn btn-neutral float-right" title="Estrutura do Projeto" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Velox Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

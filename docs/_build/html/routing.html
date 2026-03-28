@@ -1,0 +1,250 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rotas e Routing &mdash; Velox 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=c911a3e7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Banco de Dados" href="database.html" />
+    <link rel="prev" title="Configuração" href="configuration.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Velox
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Começando</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="project_structure.html">Estrutura do Projeto</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuração</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Routes e URLs</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Rotas e Routing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#definindo-rotas">Definindo Rotas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#metodos-http-suportados">Métodos HTTP Suportados</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#parametros-de-rota">Parâmetros de Rota</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#converters-disponiveis">Converters Disponíveis</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#multiplos-metodos">Múltiplos Métodos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#resource-classe">Resource (Classe)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#blueprints">Blueprints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#proximos-passos">Próximos Passos</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Banco de Dados</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="database.html">Banco de Dados</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Templates</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">Templates</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Arquivos Estáticos</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="static_files.html">Arquivos Estáticos</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Velox</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Rotas e Routing</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/routing.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rotas-e-routing">
+<h1>Rotas e Routing<a class="headerlink" href="#rotas-e-routing" title="Link to this heading"></a></h1>
+<section id="definindo-rotas">
+<h2>Definindo Rotas<a class="headerlink" href="#definindo-rotas" title="Link to this heading"></a></h2>
+<p>O Velox usa decoradores para definir rotas:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">velox</span><span class="w"> </span><span class="kn">import</span> <span class="n">Velox</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Velox</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">index</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">res</span><span class="p">):</span>
+    <span class="n">res</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="s1">&#39;Olá mundo!&#39;</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/api/data&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_data</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">res</span><span class="p">):</span>
+    <span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">({</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;ok&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+</section>
+<section id="metodos-http-suportados">
+<h2>Métodos HTTP Suportados<a class="headerlink" href="#metodos-http-suportados" title="Link to this heading"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/path&#39;</span><span class="p">)</span>      <span class="c1"># GET</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/path&#39;</span><span class="p">)</span>     <span class="c1"># POST</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s1">&#39;/path&#39;</span><span class="p">)</span>     <span class="c1"># PUT</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">&#39;/path&#39;</span><span class="p">)</span>  <span class="c1"># DELETE</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">patch</span><span class="p">(</span><span class="s1">&#39;/path&#39;</span><span class="p">)</span>   <span class="c1"># PATCH</span>
+</pre></div>
+</div>
+</section>
+<section id="parametros-de-rota">
+<h2>Parâmetros de Rota<a class="headerlink" href="#parametros-de-rota" title="Link to this heading"></a></h2>
+<p>Capture segmentos da URL:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/user/&lt;int:user_id&gt;&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_user</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">user_id</span><span class="p">):</span>
+    <span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">({</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">user_id</span><span class="p">})</span>
+</pre></div>
+</div>
+<section id="converters-disponiveis">
+<h3>Converters Disponíveis<a class="headerlink" href="#converters-disponiveis" title="Link to this heading"></a></h3>
+</section>
+</section>
+<section id="multiplos-metodos">
+<h2>Múltiplos Métodos<a class="headerlink" href="#multiplos-metodos" title="Link to this heading"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/resource&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">resource_handler</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">res</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">req</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;GET&#39;</span><span class="p">:</span>
+        <span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">({})</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">({</span><span class="s1">&#39;created&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
+</pre></div>
+</div>
+</section>
+<section id="resource-classe">
+<h2>Resource (Classe)<a class="headerlink" href="#resource-classe" title="Link to this heading"></a></h2>
+<p>Use uma classe para múltiplos métodos:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="s1">&#39;/api/posts&#39;</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">PostResource</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">res</span><span class="p">):</span>
+        <span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">({</span><span class="s1">&#39;posts&#39;</span><span class="p">:</span> <span class="p">[]})</span>
+        <span class="k">return</span> <span class="n">res</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">post</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">res</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">json</span>
+        <span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">({</span><span class="s1">&#39;created&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
+        <span class="k">return</span> <span class="n">res</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">put</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">res</span><span class="p">):</span>
+        <span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">({</span><span class="s1">&#39;updated&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
+        <span class="k">return</span> <span class="n">res</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">delete</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">res</span><span class="p">):</span>
+        <span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">({</span><span class="s1">&#39;deleted&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
+        <span class="k">return</span> <span class="n">res</span>
+</pre></div>
+</div>
+</section>
+<section id="blueprints">
+<h2>Blueprints<a class="headerlink" href="#blueprints" title="Link to this heading"></a></h2>
+<p>Organize rotas com Blueprints:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">velox</span><span class="w"> </span><span class="kn">import</span> <span class="n">Velox</span><span class="p">,</span> <span class="n">Router</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Velox</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="c1"># Criar Blueprint</span>
+<span class="n">api</span> <span class="o">=</span> <span class="n">Router</span><span class="p">()</span>
+
+<span class="nd">@api</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/users&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">list_users</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">res</span><span class="p">):</span>
+    <span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">([])</span>
+
+<span class="nd">@api</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/users/&lt;int:user_id&gt;&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_user</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">user_id</span><span class="p">):</span>
+    <span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">({</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">user_id</span><span class="p">})</span>
+
+<span class="c1"># Registrar com prefixo</span>
+<span class="n">app</span><span class="o">.</span><span class="n">include</span><span class="p">(</span><span class="n">api</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;/api&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Agora as rotas são <code class="docutils literal notranslate"><span class="pre">/api/users</span></code> e <code class="docutils literal notranslate"><span class="pre">/api/users/&lt;id&gt;</span></code>.</p>
+</section>
+<section id="proximos-passos">
+<h2>Próximos Passos<a class="headerlink" href="#proximos-passos" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Leia <span class="xref std std-doc">named_routes</span> para rotas nomeadas</p></li>
+<li><p>Explore <a class="reference internal" href="database.html"><span class="doc">Banco de Dados</span></a> para banco de dados</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="configuration.html" class="btn btn-neutral float-left" title="Configuração" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="database.html" class="btn btn-neutral float-right" title="Banco de Dados" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Velox Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,330 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Documentação do Velox Framework &mdash; Velox 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=c911a3e7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            Velox
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Começando</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="project_structure.html">Estrutura do Projeto</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuração</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Rotas e URLs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="routing.html">Rotas e Routing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Banco de Dados</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="database.html">Banco de Dados</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Templates</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">Templates</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Arquivos Estáticos</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="static_files.html">Arquivos Estáticos</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">Velox</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Documentação do Velox Framework</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="documentacao-do-velox-framework">
+<h1>Documentação do Velox Framework<a class="headerlink" href="#documentacao-do-velox-framework" title="Link to this heading"></a></h1>
+<a class="reference external image-reference" href="https://github.com/Barros1915/velox"><img alt="Velox Framework" src="_images/logo_velox.png" />
+</a>
+<p><strong>Velox — Fast Python Web Framework — WSGI + ASGI, zero dependencies</strong></p>
+<p>Velox é um framework Python web extremamente rápido sem dependências obrigatórias.
+Suporta ambos os modos:</p>
+<ul class="simple">
+<li><p><strong>WSGI/Threading</strong> — Execute sem dependências externas</p></li>
+<li><p><strong>ASGI/uvicorn</strong> — Suporte async com uvicorn</p></li>
+</ul>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Começando</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#basic-installation">Basic Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#with-asgi-support">With ASGI Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#with-full-features">With Full Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#development-dependencies">Development Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#verify-installation">Verify Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#from-source">From Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#upgrading">Upgrading</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#basic-app">Basic App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#rendering-templates">Rendering Templates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#json-api">JSON API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#route-parameters">Route Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#post-requests">POST Requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#async-handlers">Async Handlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#blueprints">Blueprints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#middleware">Middleware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#asgi-mode">ASGI Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#websocket">WebSocket</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#error-handlers">Error Handlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#static-files">Static Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#environment-variables">Environment Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="project_structure.html">Estrutura do Projeto</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="project_structure.html#criando-um-novo-projeto">Criando um Novo Projeto</a></li>
+<li class="toctree-l2"><a class="reference internal" href="project_structure.html#executando-o-projeto">Executando o Projeto</a></li>
+<li class="toctree-l2"><a class="reference internal" href="project_structure.html#criando-apps-modulares">Criando Apps Modulares</a></li>
+<li class="toctree-l2"><a class="reference internal" href="project_structure.html#usando-o-app">Usando o App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="project_structure.html#app-api-only">App API-Only</a></li>
+<li class="toctree-l2"><a class="reference internal" href="project_structure.html#proximos-passos">Próximos Passos</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuração</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#variaveis-de-ambiente">Variáveis de Ambiente</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#configuracao-programatica">Configuração Programática</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#modo-asgi">Modo ASGI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#proximos-passos">Próximos Passos</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Rotas e URLs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="routing.html">Rotas e Routing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="routing.html#definindo-rotas">Definindo Rotas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="routing.html#metodos-http-suportados">Métodos HTTP Suportados</a></li>
+<li class="toctree-l2"><a class="reference internal" href="routing.html#parametros-de-rota">Parâmetros de Rota</a></li>
+<li class="toctree-l2"><a class="reference internal" href="routing.html#multiplos-metodos">Múltiplos Métodos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="routing.html#resource-classe">Resource (Classe)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="routing.html#blueprints">Blueprints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="routing.html#proximos-passos">Próximos Passos</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Banco de Dados</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="database.html">Banco de Dados</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="database.html#configuracao">Configuração</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#criando-umaconexao">Criando umaConexão</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#operacoes-basicas">Operações Básicas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#modelo-orm">Modelo (ORM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#queries-encadeadas">Queries Encadeadas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#relacionamentos">Relacionamentos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#postgresql">PostgreSQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#async-database">Async Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="database.html#proximos-passos">Próximos Passos</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Templates</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">Templates</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="templates.html#configuracao">Configuração</a></li>
+<li class="toctree-l2"><a class="reference internal" href="templates.html#variaveis">Variáveis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="templates.html#condicionais">Condicionais</a></li>
+<li class="toctree-l2"><a class="reference internal" href="templates.html#loops">Loops</a></li>
+<li class="toctree-l2"><a class="reference internal" href="templates.html#filtros">Filtros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="templates.html#heranca-de-templates">Herança de Templates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="templates.html#macros">Macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="templates.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="templates.html#proximos-passos">Próximos Passos</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Arquivos Estáticos</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="static_files.html">Arquivos Estáticos</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="static_files.html#configuracao">Configuração</a></li>
+<li class="toctree-l2"><a class="reference internal" href="static_files.html#estrutura-de-arquivos">Estrutura de Arquivos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="static_files.html#acessando-arquivos">Acessando Arquivos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="static_files.html#pastas-multiplas">Pastas Múltiplas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="static_files.html#cache-de-arquivos-estaticos">Cache de Arquivos Estáticos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="static_files.html#proximos-passos">Próximos Passos</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#velox-core">Velox Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-velox.request">Request</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-velox.response">Response</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#router-blueprint">Router / Blueprint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#websocket">WebSocket</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#route-pattern">Route Pattern</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-functions">Module Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#constants">Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#type-aliases">Type Aliases</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<section id="por-que-usar-velox">
+<h2>Por que usar Velox?<a class="headerlink" href="#por-que-usar-velox" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Zero Dependencies</strong> — Sem pacotes externos para uso básico</p></li>
+<li><p><strong>Blazing Fast</strong> — Otimizado para performance</p></li>
+<li><p><strong>Sync + Async</strong> — Misture handlers sync e async no mesmo app</p></li>
+<li><p><strong>Modular</strong> — Use Blueprints para organizar rotas</p></li>
+<li><p><strong>WebSocket</strong> — Suporte WebSocket nativo (modo ASGI)</p></li>
+<li><p><strong>Pythonic</strong> — API limpa e intuitiva</p></li>
+<li><p><strong>ORM Integrado</strong> — Banco de dados com Model e Query Builder</p></li>
+<li><p><strong>Templates Poderosos</strong> — Herança, macros, filtros</p></li>
+<li><p><strong>Arquivos Estáticos</strong> — Servir CSS, JS, imagens</p></li>
+</ul>
+</section>
+<section id="exemplo-rapido">
+<h2>Exemplo Rápido<a class="headerlink" href="#exemplo-rapido" title="Link to this heading"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">velox</span><span class="w"> </span><span class="kn">import</span> <span class="n">Velox</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Velox</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">home</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">res</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">app</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s1">&#39;index.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;nome&#39;</span><span class="p">:</span> <span class="s1">&#39;Mundo&#39;</span><span class="p">})</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/api/dados&#39;</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">api</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">res</span><span class="p">):</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="k">await</span> <span class="n">buscar_dados</span><span class="p">()</span>
+    <span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="instalacao">
+<h2>Instalação<a class="headerlink" href="#instalacao" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>velox-framework
+</pre></div>
+</div>
+<p>Ou com extras:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>velox-framework<span class="o">[</span>asgi<span class="o">]</span><span class="w">    </span><span class="c1"># Com uvicorn</span>
+pip<span class="w"> </span>install<span class="w"> </span>velox-framework<span class="o">[</span>full<span class="o">]</span><span class="w">   </span><span class="c1"># Todas features</span>
+pip<span class="w"> </span>install<span class="w"> </span>velox-framework<span class="o">[</span>dev<span class="o">]</span><span class="w">  </span><span class="c1"># Desenvolvimento</span>
+</pre></div>
+</div>
+</section>
+<section id="links">
+<h2>Links<a class="headerlink" href="#links" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/Barros1915/velox">GitHub</a></p></li>
+<li><p><a class="reference external" href="https://pypi.org/project/velox-framework/">PyPI</a></p></li>
+<li><p><a class="reference external" href="https://github.com/Barros1915/velox/issues">Report Issues</a></p></li>
+</ul>
+</section>
+</section>
+<section id="indices-e-tabelas">
+<h1>Índices e tabelas<a class="headerlink" href="#indices-e-tabelas" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Velox Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

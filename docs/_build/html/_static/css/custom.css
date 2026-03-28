@@ -1,0 +1,54 @@
+/* Velox Documentation Custom Styles */
+
+:root {
+    --velox-primary: #5865f2;
+    --velox-dark: #1a1a2e;
+    --velox-light: #f8f9fa;
+}
+
+/* Logo styling */
+.wy-side-nav-search img.logo {
+    max-width: 80%;
+}
+
+/* Version badge */
+.version {
+    font-weight: 600;
+    color: var(--velox-primary);
+}
+
+/* Code block styling */
+pre {
+    border-left: 3px solid var(--velox-primary);
+}
+
+.highlight {
+    border-radius: 4px;
+}
+
+/* Link styling */
+a {
+    color: var(--velox-primary);
+}
+
+a:hover {
+    color: #4752c4;
+}
+
+/* Navigation styling */
+.wy-menu-vertical li.current a {
+    border-right: 3px solid var(--velox-primary);
+}
+
+/* Admonition styling */
+.admonition-note {
+    border-left-color: #5865f2;
+}
+
+.admonition-warning {
+    border-left-color: #f59e0b;
+}
+
+.admonition-danger {
+    border-left-color: #ef4444;
+} 
