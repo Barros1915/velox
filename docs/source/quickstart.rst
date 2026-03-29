@@ -214,7 +214,7 @@ Run with uvicorn for async support:
 
 .. code-block:: bash
 
-   pip install velox-framework[asgi]
+pip install velox-web[asgi]
 
 Then run:
 

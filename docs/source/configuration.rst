@@ -77,7 +77,7 @@ Para usar async com uvicorn:
 
 .. code-block:: bash
 
-   pip install velox-framework[asgi]
+pip install velox-web[asgi]
 
 Execute:
 

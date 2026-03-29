@@ -13,7 +13,7 @@ Install Velox from PyPI:
 
 .. code-block:: bash
 
-   pip install velox-framework
+pip install velox-web
 
 This installs Velox without any dependencies.
 
@@ -24,11 +24,11 @@ To use async features, install with uvicorn:
 
 .. code-block:: bash
 
-   pip install velox-framework[asgi]
+   pip install velox-web[asgi]
 
 This installs:
 
-- ``velox-framework`` — The framework
+- ``velox-web`` — The framework
 - ``uvicorn`` — ASGI server
 
 With Full Features
@@ -38,11 +38,11 @@ To install all features:
 
 .. code-block:: bash
 
-   pip install velox-framework[full]
+   pip install velox-web[full]
 
 This installs:
 
-- ``velox-framework`` — The framework
+- ``velox-web`` — The framework
 - ``uvicorn`` — ASGI server
 - ``psycopg2-binary`` — PostgreSQL support
 - ``redis`` — Redis cache support
@@ -50,13 +50,13 @@ This installs:
 - ``asyncpg`` — Async PostgreSQL support
 
 Development Dependencies
--------------------------
+----------------------
 
 For local development:
 
 .. code-block:: bash
 
-   pip install velox-framework[dev]
+   pip install velox-web[dev]
 
 This installs:
 
@@ -109,10 +109,10 @@ To upgrade to the latest version:
 
 .. code-block:: bash
 
-   pip install --upgrade velox-framework
+   pip install --upgrade velox-web
 
 Or for a specific version:
 
 .. code-block:: bash
 
-   pip install velox-framework==1.0.0
+   pip install velox-web==1.0.0

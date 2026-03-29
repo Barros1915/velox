@@ -8,7 +8,7 @@
 **O framework Python que cresce com você — de um arquivo único até uma aplicação completa.**
 
 ```bash
-pip install velox-framework
+pip install velox-web
 ```
 
 ---
@@ -178,7 +178,7 @@ async def get_post(req, res, id):
 
 Instale os drivers async:
 ```bash
-pip install velox-framework[async]
+pip install velox-web[async]
 # aiosqlite (SQLite) + asyncpg (PostgreSQL)
 ```
 
@@ -438,16 +438,16 @@ log.error('Erro ao conectar ao banco')
 
 ```bash
 # Básico (zero dependências)
-pip install velox-framework
+pip install velox-web
 
 # Com ASGI (uvicorn)
-pip install velox-framework[asgi]
+pip install velox-web[asgi]
 
 # Com PostgreSQL
-pip install velox-framework[postgres]
+pip install velox-web[postgres]
 
 # Tudo
-pip install velox-framework[full]
+pip install velox-web[full]
 ```
 
 ---

@@ -90,21 +90,21 @@ Instalação
 
 .. code-block:: bash
 
-   pip install velox-framework
+   pip install velox-web
 
 Ou com extras:
 
 .. code-block:: bash
 
-   pip install velox-framework[asgi]    # Com uvicorn
-   pip install velox-framework[full]   # Todas features
-   pip install velox-framework[dev]  # Desenvolvimento
+   pip install velox-web[asgi]    # Com uvicorn
+   pip install velox-web[full]   # Todas features
+   pip install velox-web[dev]  # Desenvolvimento
 
 Links
 -----
 
 - `GitHub <https://github.com/Barros1915/velox>`_
-- `PyPI <https://pypi.org/project/velox-framework/>`_
+- `PyPI <https://pypi.org/project/velox-web/>`_
 - `Report Issues <https://github.com/Barros1915/velox/issues>`_
 
 Índices e tabelas
