@@ -1,7 +1,7 @@
 # Velox Framework
 
-[![Tests](https://github.com/seuusuario/velox/actions/workflows/tests.yml/badge.svg)](https://github.com/seuusuario/velox/actions/workflows/tests.yml)
-[![codecov](https://codecov.io/gh/seuusuario/velox/branch/main/graph/badge.svg)](https://codecov.io/gh/seuusuario/velox)
+[![Tests](https://github.com/Barros1915/velox/actions/workflows/tests.yml/badge.svg)](https://github.com/Barros1915/velox/actions/workflows/tests.yml)
+[![codecov](https://codecov.io/gh/Barros1915/velox/branch/main/graph/badge.svg)](https://codecov.io/gh/Barros1915/velox)
 [![Python Versions](https://img.shields.io/pypi/pyversions/velox-framework.svg)](https://pypi.org/project/velox-framework/)
 [![License](https://img.shields.io/pypi/l/velox-framework.svg)](https://pypi.org/project/velox-framework/)
 
