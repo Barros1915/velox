@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "velox-web"
-version = "1.0.0"
+version = "1.0.1"
 description = "Fast Python Web Framework — WSGI + ASGI, zero dependencies"
 authors = [{ name = "Barros1915" }]
 readme = "README.md"
