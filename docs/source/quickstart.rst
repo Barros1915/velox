@@ -25,9 +25,18 @@ Run it:
 
 .. code-block:: bash
 
+   # Modo simples
    python app.py
 
+   # Com auto-reload (reinicia ao salvar arquivos)
+   velox run --reload
+
+   # Porta customizada
+   velox run --port 5000 --reload
+
 Server running at http://localhost:8000
+
+O Velox monitora alterações em ``.py``, ``.html``, ``.css``, ``.js`` e ``.env``.
 
 Rendering Templates
 ------------------
