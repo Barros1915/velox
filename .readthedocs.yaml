@@ -7,12 +7,10 @@ version: 2
 
 # Build documentation in the docs/ directory
 build:
-  os: ubuntu-22.04
+  os: ubuntu-lts-latest
   tools:
     python: "3.9"
   commands:
-    - python -m pip install --upgrade pip
-    - pip install -e ".[dev]"
     - sphinx-build -b html docs/source docs/build/html
 
 # Python project
@@ -28,9 +26,6 @@ sphinx:
   builder: html
   configuration: docs/source/conf.py
 
-# Optional - specify static files to include
-# static_include_only:
-#   - assets/
-
-# Optional - don't build PDF/ePub
-# formats: []
+# Build HTML and don't build PDF/ePub
+formats:
+  - html
