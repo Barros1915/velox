@@ -4,8 +4,11 @@
 [![codecov](https://codecov.io/gh/Barros1915/velox/branch/main/graph/badge.svg)](https://codecov.io/gh/Barros1915/velox)
 [![Python Versions](https://img.shields.io/pypi/pyversions/velox-framework.svg)](https://pypi.org/project/velox-framework/)
 [![License](https://img.shields.io/pypi/l/velox-framework.svg)](https://pypi.org/project/velox-framework/)
+[![Docs](https://img.shields.io/badge/Docs-GitHub%20Pages-blue)](https://barros1915.github.io/velox/)
 
 **O framework Python que cresce com você — de um arquivo único até uma aplicação completa.**
+
+📚 **[Documentação completa no GitHub Pages](https://barros1915.github.io/velox/)**
 
 ```bash
 pip install velox-web
