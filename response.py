@@ -5,7 +5,7 @@ Type hints adicionados para melhorar IntelliSense e experiência do desenvolvedo
 """
 
 import json
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, List, Optional, Union
 
 
 class Response:
@@ -31,18 +31,30 @@ class Response:
     body: Union[str, bytes, dict, list, None]
     status_code: int
     _headers: Dict[str, str]
-    
-    def __init__(self, body: Union[str, bytes, dict, list, None] = '', 
-                 status_code: int = 200, 
+    _cookies: List[str]
+
+    def __init__(self, body: Union[str, bytes, dict, list, None] = '',
+                 status_code: int = 200,
                  headers: Optional[Dict[str, str]] = None):
         self.body = body
         self.status_code = status_code
         self._headers = headers or {}
+        self._cookies: List[str] = []   # lista para suportar múltiplos Set-Cookie
     
     @property
     def headers(self) -> Dict[str, str]:
         """Retorna os headers da resposta"""
         return self._headers
+
+    def get_header_list(self) -> List[tuple]:
+        """
+        Retorna todos os headers como lista de tuplas (name, value).
+        Necessário para enviar múltiplos Set-Cookie corretamente.
+        """
+        result = list(self._headers.items())
+        for cookie in self._cookies:
+            result.append(('Set-Cookie', cookie))
+        return result
     
     def set_header(self, name: str, value: str) -> 'Response':
         """Define um header específico. Retorna self para chaining."""
@@ -112,7 +124,7 @@ class Response:
         self._headers['Location'] = location
         return self
     
-    def set_cookie(self, name: str, value: str, 
+    def set_cookie(self, name: str, value: str,
                    expires: Optional[int] = None,
                    path: str = '/',
                    secure: bool = False,
@@ -120,11 +132,14 @@ class Response:
                    samesite: Optional[str] = None) -> 'Response':
         """
         Define um cookie na resposta.
-        
+
+        Múltiplas chamadas a set_cookie são acumuladas corretamente —
+        cada cookie é enviado como um header Set-Cookie separado.
+
         Args:
             name: Nome do cookie
             value: Valor do cookie
-            expires: Tempo de expiração em segundos
+            expires: Tempo de expiração em segundos (Max-Age)
             path: Caminho do cookie
             secure: HTTPS only
             httponly: Inacessível via JavaScript
@@ -140,13 +155,15 @@ class Response:
             parts.append('HttpOnly')
         if samesite:
             parts.append(f'SameSite={samesite}')
-        
-        self._headers['Set-Cookie'] = '; '.join(parts)
+        # FIX: append à lista em vez de sobrescrever o dict (suporta múltiplos cookies)
+        self._cookies.append('; '.join(parts))
         return self
-    
+
     def delete_cookie(self, name: str, path: str = '/') -> 'Response':
         """Remove um cookie definindo expiração no passado"""
-        self._headers['Set-Cookie'] = f'{name}=; Path={path}; Expires=Thu, 01 Jan 1970 00:00:00 GMT'
+        self._cookies.append(
+            f'{name}=; Path={path}; Expires=Thu, 01 Jan 1970 00:00:00 GMT'
+        )
         return self
     
     @property

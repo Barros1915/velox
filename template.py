@@ -143,7 +143,7 @@ class TemplateEngine:
             'round': lambda x, decimals=0: round(float(x), int(decimals)),
             
             # URL
-            'urlencode': lambda x: __import__('urllib.parse').quote(str(x)),
+            'urlencode': lambda x: __import__('urllib.parse', fromlist=['quote']).quote(str(x)),
             'urlize': lambda x: re.sub(r'(http[s]?://[^\s]+)', r'<a href="\1">\1</a>', str(x)),
         }
     

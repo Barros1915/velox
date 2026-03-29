@@ -17,29 +17,32 @@ class Signal:
     
     def connect(self, receiver: Callable, sender: Any = None, weak: bool = True, dispatch_uid: str = None):
         """Conecta um receiver ao sinal"""
-        # Criar receiver wrapper
-        lookup_key = (sender, dispatch_uid)
-        
-        # Verificar se já existe
+        # FIX: quando dispatch_uid é None, usa o id() do receiver para evitar
+        # duplicatas — sem isso, múltiplas chamadas com dispatch_uid=None
+        # registrariam o mesmo handler várias vezes.
+        uid = dispatch_uid if dispatch_uid is not None else id(receiver)
+
         for existing in self._receivers:
-            if (existing[0] == sender and existing[1] == dispatch_uid):
+            if existing[0] == sender and existing[1] == uid:
                 return  # Já conectado
-        
-        self._receivers.append((sender, dispatch_uid, receiver))
+
+        self._receivers.append((sender, uid, receiver))
         self._dead_receivers = False
     
     def disconnect(self, receiver: Callable = None, sender: Any = None, dispatch_uid: str = None):
         """Desconecta um receiver"""
         if receiver is None:
-            # Desconectar por sender e uid
+            uid = dispatch_uid
             self._receivers = [
-                r for r in self._receivers 
-                if not (r[0] == sender and r[1] == dispatch_uid)
+                r for r in self._receivers
+                if not (r[0] == sender and r[1] == uid)
             ]
         else:
+            # FIX: remove pelo id() do receiver para consistência com connect()
+            uid = dispatch_uid if dispatch_uid is not None else id(receiver)
             self._receivers = [
-                r for r in self._receivers 
-                if r[2] != receiver
+                r for r in self._receivers
+                if not (r[0] == sender and r[1] == uid)
             ]
     
     def send(self, sender: Any = None, **kwargs):

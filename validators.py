@@ -18,6 +18,9 @@ class ValidationError(Exception):
 class Validator:
     """Validador base"""
     def __call__(self, value):
+        return self.validate(value)
+
+    def validate(self, value):
         raise NotImplementedError
 
 
@@ -27,8 +30,8 @@ class RegexValidator(Validator):
         self.regex = re.compile(regex or r'.+')
         self.message = message or "Valor inválido"
         self.code = code or 'invalid'
-    
-    def __call__(self, value):
+
+    def validate(self, value):
         if not self.regex.match(str(value)):
             raise ValidationError(self.message, self.code)
 
@@ -40,8 +43,8 @@ class EmailValidator(Validator):
     )
     message = "Email inválido"
     code = 'invalid_email'
-    
-    def __call__(self, value):
+
+    def validate(self, value):
         if not self.regex.match(str(value)):
             raise ValidationError(self.message, self.code)
 
@@ -49,17 +52,17 @@ class EmailValidator(Validator):
 class URLValidator(Validator):
     """Valida URL"""
     regex = re.compile(
-        r'^https?://'  # http:// ou https://
-        r'(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+[A-Z]{2,6}\.?|'  # dominio
-        r'localhost|'  # localhost
-        r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})'  # ou IP
-        r'(?::\d+)?'  # porta opcional
+        r'^https?://'
+        r'(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+[A-Z]{2,6}\.?|'
+        r'localhost|'
+        r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})'
+        r'(?::\d+)?'
         r'(?:/?|[/?]\S+)$', re.IGNORECASE
     )
     message = "URL inválida"
     code = 'invalid_url'
-    
-    def __call__(self, value):
+
+    def validate(self, value):
         if not self.regex.match(str(value)):
             raise ValidationError(self.message, self.code)
 
@@ -69,8 +72,8 @@ class MinLengthValidator(Validator):
     def __init__(self, min_length, message=None):
         self.min_length = min_length
         self.message = message or f"Mínimo de {min_length} caracteres"
-    
-    def __call__(self, value):
+
+    def validate(self, value):
         if len(str(value)) < self.min_length:
             raise ValidationError(self.message, 'min_length')
 
@@ -80,8 +83,8 @@ class MaxLengthValidator(Validator):
     def __init__(self, max_length, message=None):
         self.max_length = max_length
         self.message = message or f"Máximo de {max_length} caracteres"
-    
-    def __call__(self, value):
+
+    def validate(self, value):
         if len(str(value)) > self.max_length:
             raise ValidationError(self.message, 'max_length')
 
@@ -91,8 +94,8 @@ class MinValueValidator(Validator):
     def __init__(self, min_value, message=None):
         self.min_value = min_value
         self.message = message or f"Valor mínimo é {min_value}"
-    
-    def __call__(self, value):
+
+    def validate(self, value):
         if value < self.min_value:
             raise ValidationError(self.message, 'min_value')
 
@@ -102,8 +105,8 @@ class MaxValueValidator(Validator):
     def __init__(self, max_value, message=None):
         self.max_value = max_value
         self.message = message or f"Valor máximo é {max_value}"
-    
-    def __call__(self, value):
+
+    def validate(self, value):
         if value > self.max_value:
             raise ValidationError(self.message, 'max_value')
 
@@ -113,8 +116,8 @@ class ChoicesValidator(Validator):
     def __init__(self, choices, message=None):
         self.choices = choices
         self.message = message or "Opção inválida"
-    
-    def __call__(self, value):
+
+    def validate(self, value):
         if value not in self.choices:
             raise ValidationError(self.message, 'invalid_choice')
 
