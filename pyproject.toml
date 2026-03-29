@@ -3,10 +3,9 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "velox-web"
-version = "1.0.2"
+name = "velox-framework"
+version = "1.0.0"
 description = "Fast Python Web Framework — WSGI + ASGI, zero dependencies"
-authors = [{ name = "Barros1915" }]
 readme = "README.md"
 license = { text = "MIT" }
 requires-python = ">=3.9"
@@ -32,21 +31,23 @@ dependencies = []
 asgi     = ["uvicorn>=0.20"]
 postgres = ["psycopg2-binary>=2.9"]
 redis    = ["redis>=4.0"]
-async    = ["aiosqlite>=0.19", "asyncpg>=0.29"]
-full     = ["uvicorn>=0.20", "psycopg2-binary>=2.9", "redis>=4.0", "aiosqlite>=0.19", "asyncpg>=0.29"]
+mysql    = ["mysql-connector-python>=8.0"]
+mariadb  = ["mysql-connector-python>=8.0"]
+async    = ["aiosqlite>=0.19", "asyncpg>=0.27", "aiomysql>=0.2"]
+full     = ["uvicorn>=0.20", "psycopg2-binary>=2.9", "mysql-connector-python>=8.0", "redis>=4.0", "aiosqlite>=0.19", "asyncpg>=0.27", "aiomysql>=0.2"]
 dev      = ["pytest>=7.0", "pytest-asyncio>=0.21", "httpx>=0.24"]
 
 [project.scripts]
 velox = "velox.cli:main"
 
 [project.urls]
-Homepage   = "https://github.com/Barros1915/velox"
-Repository = "https://github.com/Barros1915/velox"
-Issues     = "https://github.com/Barros1915/velox/issues"
+Homepage   = "https://github.com/seuusuario/velox"
+Repository = "https://github.com/seuusuario/velox"
+Issues     = "https://github.com/seuusuario/velox/issues"
 
 [tool.setuptools.packages.find]
 where   = ["."]
-include = ["*"]
+include = ["velox*"]
 
 [tool.setuptools.package-data]
-"*" = ["py.typed", "assets/*"]
+velox = ["py.typed", "assets/*"]

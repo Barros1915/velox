@@ -1,9 +1,21 @@
 """
 Módulo de Banco de Dados (ORM) do Velox
 
-Suporta SQLite e PostgreSQL.
-Instale psycopg2 para usar PostgreSQL:
-    pip install psycopg2-binary
+Suporta SQLite, PostgreSQL, MySQL e MariaDB.
+
+    pip install velox-web[postgres]   # PostgreSQL
+    pip install velox-web[mysql]      # MySQL
+    pip install velox-web[mariadb]    # MariaDB (mesmo driver do MySQL)
+
+Ou instale os drivers diretamente:
+    pip install psycopg2-binary       # PostgreSQL
+    pip install mysql-connector-python  # MySQL / MariaDB
+
+URIs suportadas:
+    sqlite:///db/app.db
+    postgresql://user:pass@localhost/mydb
+    mysql://user:pass@localhost/mydb
+    mariadb://user:pass@localhost/mydb
 
 Recursos:
 - ORM completo com Model
@@ -63,28 +75,96 @@ class _SQLitePool:
             self._local.conn = None
 
 
+class _MySQLPool:
+    """
+    Pool thread-local para MySQL/MariaDB.
+    Cada thread tem sua própria conexão reutilizável.
+    """
+    def __init__(self, uri: str):
+        self._uri   = uri
+        self._local = threading.local()
+
+    def _parse(self) -> dict:
+        parsed = urlparse(self._uri)
+        return {
+            'host':     parsed.hostname or 'localhost',
+            'port':     parsed.port or 3306,
+            'database': parsed.path.lstrip('/') if parsed.path else '',
+            'user':     parsed.username or 'root',
+            'password': parsed.password or '',
+        }
+
+    def get(self):
+        conn = getattr(self._local, 'conn', None)
+        # Reconecta se a conexão foi encerrada pelo servidor
+        if conn is not None:
+            try:
+                conn.ping(reconnect=True)
+            except Exception:
+                conn = None
+        if conn is None:
+            try:
+                import mysql.connector
+            except ImportError:
+                raise ImportError(
+                    "mysql-connector-python não instalado. Execute:\n"
+                    "  pip install mysql-connector-python\n"
+                    "ou: pip install velox-web[mysql]"
+                )
+            params = self._parse()
+            conn = mysql.connector.connect(
+                host=params['host'],
+                port=params['port'],
+                database=params['database'],
+                user=params['user'],
+                password=params['password'],
+                autocommit=False,
+                charset='utf8mb4',
+                collation='utf8mb4_unicode_ci',
+                use_pure=True,
+            )
+            self._local.conn = conn
+        return conn
+
+    def close(self):
+        conn = getattr(self._local, 'conn', None)
+        if conn:
+            try:
+                conn.close()
+            except Exception:
+                pass
+            self._local.conn = None
+
+
 class Database:
     """
     Gerenciador de banco de dados com connection pooling.
-    SQLite: pool thread-local (uma conexão por thread, reutilizada).
+
+    SQLite:     pool thread-local (uma conexão por thread, reutilizada).
     PostgreSQL: conexão única por instância (use pgBouncer para pool externo).
+    MySQL/MariaDB: pool thread-local com auto-reconexão.
     """
 
     def __init__(self, db_name='app.db'):
-        self.db_name      = db_name
-        self._is_postgres = db_name.startswith(('postgresql://', 'postgres://'))
-        self._pg_conn     = None          # PostgreSQL: conexão única
-        self._pool        = None          # SQLite: pool thread-local
-        if not self._is_postgres:
+        self.db_name       = db_name
+        self._is_postgres  = db_name.startswith(('postgresql://', 'postgres://'))
+        self._is_mysql     = db_name.startswith(('mysql://', 'mariadb://'))
+        self._pg_conn      = None   # PostgreSQL: conexão única
+        self._pool         = None   # SQLite/MySQL: pool thread-local
+
+        if self._is_mysql:
+            self._pool = _MySQLPool(db_name)
+        elif not self._is_postgres:
             self._pool = _SQLitePool(db_name)
 
     def _get_connection_string(self):
         parsed = urlparse(self.db_name)
+        default_port = 3306 if self._is_mysql else 5432
         return {
             'host':     parsed.hostname or 'localhost',
-            'port':     parsed.port or 5432,
+            'port':     parsed.port or default_port,
             'database': parsed.path.lstrip('/') if parsed.path else '',
-            'user':     parsed.username or 'postgres',
+            'user':     parsed.username or ('root' if self._is_mysql else 'postgres'),
             'password': parsed.password or '',
         }
 
@@ -97,9 +177,12 @@ class Database:
                     self._pg_conn.autocommit = False
                 except ImportError:
                     raise ImportError(
-                        "psycopg2 não instalado. Execute:\n  pip install psycopg2-binary"
+                        "psycopg2 não instalado. Execute:\n"
+                        "  pip install psycopg2-binary\n"
+                        "ou: pip install velox-web[postgres]"
                     )
             return self._pg_conn
+        # MySQL e MariaDB usam o pool thread-local
         return self._pool.get()
 
     # Alias para compatibilidade
@@ -116,6 +199,9 @@ class Database:
 
     def execute(self, query, params=None):
         conn   = self.connect()
+        # MySQL usa %s como placeholder — converte ? se necessário
+        if self._is_mysql and params:
+            query = query.replace('?', '%s')
         cursor = conn.cursor()
         try:
             cursor.execute(query, params) if params else cursor.execute(query)
@@ -126,11 +212,25 @@ class Database:
             raise e
 
     def fetchone(self, query, params=None):
-        row = self.execute(query, params).fetchone()
-        return dict(row) if row else None
+        if self._is_mysql and params:
+            query = query.replace('?', '%s')
+        cursor = self.execute(query, params)
+        row    = cursor.fetchone()
+        if row is None:
+            return None
+        if self._is_mysql:
+            cols = [d[0] for d in cursor.description]
+            return dict(zip(cols, row))
+        return dict(row)
 
     def fetchall(self, query, params=None):
-        return [dict(r) for r in self.execute(query, params).fetchall()]
+        if self._is_mysql and params:
+            query = query.replace('?', '%s')
+        cursor = self.execute(query, params)
+        if self._is_mysql:
+            cols = [d[0] for d in cursor.description]
+            return [dict(zip(cols, r)) for r in cursor.fetchall()]
+        return [dict(r) for r in cursor.fetchall()]
 
     def __enter__(self):
         self.connect()
@@ -141,7 +241,11 @@ class Database:
 
     @property
     def driver(self) -> str:
-        return 'postgresql' if self._is_postgres else 'sqlite'
+        if self._is_postgres:
+            return 'postgresql'
+        if self._is_mysql:
+            return 'mysql'
+        return 'sqlite'
 
 
 # ─────────────────────────────────────────
@@ -227,7 +331,7 @@ class Model:
         if cls._db is None:
             db_uri = os.environ.get('DATABASE_URI', 'db/app.db')
             # Garante que a pasta existe para SQLite
-            if not db_uri.startswith(('postgresql://', 'postgres://')):
+            if not db_uri.startswith(('postgresql://', 'postgres://', 'mysql://', 'mariadb://')):
                 import pathlib
                 pathlib.Path(db_uri).parent.mkdir(parents=True, exist_ok=True)
             cls._db = Database(db_uri)
@@ -241,7 +345,8 @@ class Model:
     @classmethod
     def _placeholder(cls) -> str:
         """Retorna o placeholder correto para o banco"""
-        return '?' if cls._get_driver() == 'sqlite' else '%s'
+        driver = cls._get_driver()
+        return '?' if driver == 'sqlite' else '%s'
     
     @classmethod
     def _column_type(cls, col_type) -> str:
@@ -267,29 +372,31 @@ class Model:
     def create_table(cls):
         if not cls.table:
             raise ValueError("Nome da tabela não definido")
-        
+
         driver = cls._get_driver()
-        
+
         # Colunas do schema
         columns = []
         for col, col_type in cls.schema.items():
             col_def = f"{col} {cls._column_type(col_type)}"
             columns.append(col_def)
-        
+
         # Criar tabela principal
         if driver == 'postgresql':
             query = f"CREATE TABLE IF NOT EXISTS {cls.table} (id SERIAL PRIMARY KEY, {', '.join(columns)})"
+        elif driver == 'mysql':
+            query = f"CREATE TABLE IF NOT EXISTS {cls.table} (id INTEGER AUTO_INCREMENT PRIMARY KEY, {', '.join(columns)}) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci"
         else:
             query = f"CREATE TABLE IF NOT EXISTS {cls.table} (id INTEGER PRIMARY KEY AUTOINCREMENT, {', '.join(columns)})"
-        
+
         cls._get_db().execute(query)
-        
+
         # Criar tabelas de relacionamento ManyToMany
         for rel_name, rel in cls._relationships.items():
             if isinstance(rel, ManyToMany):
                 through = rel.through or f"{cls.table}_{rel_name}"
                 other_table = rel.to.lower() if rel.to[0].isupper() else rel.to
-                
+
                 if driver == 'postgresql':
                     query = f'''
                         CREATE TABLE IF NOT EXISTS {through} (
@@ -298,6 +405,17 @@ class Model:
                             {other_table}_id INTEGER REFERENCES {other_table}(id) ON DELETE CASCADE,
                             UNIQUE({cls.table}_id, {other_table}_id)
                         )
+                    '''
+                elif driver == 'mysql':
+                    query = f'''
+                        CREATE TABLE IF NOT EXISTS {through} (
+                            id INTEGER AUTO_INCREMENT PRIMARY KEY,
+                            {cls.table}_id INTEGER,
+                            {other_table}_id INTEGER,
+                            FOREIGN KEY ({cls.table}_id) REFERENCES {cls.table}(id) ON DELETE CASCADE,
+                            FOREIGN KEY ({other_table}_id) REFERENCES {other_table}(id) ON DELETE CASCADE,
+                            UNIQUE KEY uq_{through} ({cls.table}_id, {other_table}_id)
+                        ) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
                     '''
                 else:
                     query = f'''
@@ -340,6 +458,7 @@ class Model:
             row = cursor.fetchone()
             last_id = row[0] if row else None
         else:
+            # SQLite e MySQL usam lastrowid
             query = f"INSERT INTO {cls.table} ({columns}) VALUES ({placeholders})"
             cursor = db.execute(query, list(kwargs.values()))
             last_id = cursor.lastrowid
@@ -591,6 +710,11 @@ class Model:
                 f"INSERT INTO {through} ({self_col}, {other_col}) VALUES ({ph}, {ph}) ON CONFLICT DO NOTHING",
                 (self.id, other.id)
             )
+        elif self._get_driver() == 'mysql':
+            self._get_db().execute(
+                f"INSERT IGNORE INTO {through} ({self_col}, {other_col}) VALUES ({ph}, {ph})",
+                (self.id, other.id)
+            )
         else:
             self._get_db().execute(
                 f"INSERT OR IGNORE INTO {through} ({self_col}, {other_col}) VALUES ({ph}, {ph})",
@@ -678,7 +802,7 @@ class QueryBuilder:
     
     def where_in(self, column: str, values: List) -> 'QueryBuilder':
         """WHERE column IN (values)"""
-        ph = '?' if self._db and self._db.driver == 'sqlite' else '%s'
+        ph = '?' if (self._db and self._db.driver == 'sqlite') else '%s'
         placeholders = ', '.join([ph for _ in values])
         self._where.append((column, 'IN', f"({placeholders})", 'AND', values))
         return self
@@ -742,7 +866,7 @@ class QueryBuilder:
     
     def _build_query(self) -> tuple:
         """Constrói a query SQL"""
-        ph = '?' if self._db and self._db.driver == 'sqlite' else '%s'
+        ph = '?' if (self._db and self._db.driver == 'sqlite') else '%s'
         
         columns = ', '.join(self._select) if self._select else '*'
         query = f"SELECT {columns} FROM {self.table}"
@@ -861,7 +985,7 @@ def create_database(db_name: str = None) -> Database:
     if db_name is None:
         db_name = os.environ.get('DATABASE_URI', 'db/app.db')
     # Garante que a pasta existe para SQLite
-    if not db_name.startswith(('postgresql://', 'postgres://')):
+    if not db_name.startswith(('postgresql://', 'postgres://', 'mysql://', 'mariadb://')):
         import pathlib
         pathlib.Path(db_name).parent.mkdir(parents=True, exist_ok=True)
     return Database(db_name)
@@ -894,15 +1018,23 @@ class Migrations:
         """Cria tabela de migrations se não existir"""
         if self.db.driver == 'postgresql':
             self.db.execute('''
-                CREATE TABLE IF NOT EXISTS pycore_migrations (
+                CREATE TABLE IF NOT EXISTS velox_migrations (
                     id SERIAL PRIMARY KEY,
                     name TEXT NOT NULL UNIQUE,
                     applied_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 )
             ''')
+        elif self.db.driver == 'mysql':
+            self.db.execute('''
+                CREATE TABLE IF NOT EXISTS velox_migrations (
+                    id INTEGER AUTO_INCREMENT PRIMARY KEY,
+                    name VARCHAR(255) NOT NULL UNIQUE,
+                    applied_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                ) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+            ''')
         else:
             self.db.execute('''
-                CREATE TABLE IF NOT EXISTS pycore_migrations (
+                CREATE TABLE IF NOT EXISTS velox_migrations (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     name TEXT NOT NULL UNIQUE,
                     applied_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -911,27 +1043,27 @@ class Migrations:
     
     def get_applied(self) -> List[str]:
         """Retorna lista de migrations aplicadas"""
-        rows = self.db.fetchall("SELECT name FROM pycore_migrations ORDER BY id")
+        rows = self.db.fetchall("SELECT name FROM velox_migrations ORDER BY id")
         return [row['name'] for row in rows]
-    
+
     def is_applied(self, name: str) -> bool:
         """Verifica se uma migration foi aplicada"""
         return name in self.get_applied()
-    
+
     def apply(self, name: str, migration: Migration):
         """Aplica uma migration"""
         if not self.is_applied(name):
             migration.up()
-            ph = '?' if self.db.driver == 'sqlite' else '%s'
-            self.db.execute(f"INSERT INTO pycore_migrations (name) VALUES ({ph})", (name,))
+            ph = '%s' if self.db.driver in ('postgresql', 'mysql') else '?'
+            self.db.execute(f"INSERT INTO velox_migrations (name) VALUES ({ph})", (name,))
             print(f"[Migration] Applied: {name}")
-    
+
     def rollback(self, name: str, migration: Migration):
         """Reverte uma migration"""
         if self.is_applied(name):
             migration.down()
-            ph = '?' if self.db.driver == 'sqlite' else '%s'
-            self.db.execute(f"DELETE FROM pycore_migrations WHERE name = {ph}", (name,))
+            ph = '%s' if self.db.driver in ('postgresql', 'mysql') else '?'
+            self.db.execute(f"DELETE FROM velox_migrations WHERE name = {ph}", (name,))
             print(f"[Migration] Rolled back: {name}")
 
 
@@ -943,8 +1075,9 @@ class AsyncDatabase:
     """
     Banco de dados assíncrono — não bloqueia o event loop no modo ASGI.
 
-    SQLite:     pip install aiosqlite
-    PostgreSQL: pip install asyncpg
+    SQLite:        pip install aiosqlite
+    PostgreSQL:    pip install asyncpg
+    MySQL/MariaDB: pip install aiomysql
 
     Uso:
         db = AsyncDatabase('db/app.db')
@@ -966,11 +1099,25 @@ class AsyncDatabase:
     def __init__(self, db_name: str = 'db/app.db'):
         self.db_name      = db_name
         self._is_postgres = db_name.startswith(('postgresql://', 'postgres://'))
+        self._is_mysql    = db_name.startswith(('mysql://', 'mariadb://'))
         self._pg_pool     = None   # asyncpg pool
         self._sqlite_conn = None   # aiosqlite connection
+        self._mysql_pool  = None   # aiomysql pool
 
     def _pg_dsn(self) -> str:
         return self.db_name
+
+    def _mysql_params(self) -> dict:
+        parsed = urlparse(self.db_name)
+        return {
+            'host':   parsed.hostname or 'localhost',
+            'port':   parsed.port or 3306,
+            'db':     parsed.path.lstrip('/') if parsed.path else '',
+            'user':   parsed.username or 'root',
+            'password': parsed.password or '',
+            'charset':  'utf8mb4',
+            'autocommit': False,
+        }
 
     async def connect(self):
         if self._is_postgres:
@@ -983,6 +1130,19 @@ class AsyncDatabase:
                         "asyncpg não instalado. Execute:\n  pip install asyncpg"
                     )
             return self._pg_pool
+        elif self._is_mysql:
+            if self._mysql_pool is None:
+                try:
+                    import aiomysql
+                    params = self._mysql_params()
+                    self._mysql_pool = await aiomysql.create_pool(**params)
+                except ImportError:
+                    raise ImportError(
+                        "aiomysql não instalado. Execute:\n"
+                        "  pip install aiomysql\n"
+                        "ou: pip install velox-web[mysql]"
+                    )
+            return self._mysql_pool
         else:
             if self._sqlite_conn is None:
                 try:
@@ -1003,6 +1163,10 @@ class AsyncDatabase:
         if self._is_postgres and self._pg_pool:
             await self._pg_pool.close()
             self._pg_pool = None
+        elif self._is_mysql and self._mysql_pool:
+            self._mysql_pool.close()
+            await self._mysql_pool.wait_closed()
+            self._mysql_pool = None
         elif self._sqlite_conn:
             await self._sqlite_conn.close()
             self._sqlite_conn = None
@@ -1014,6 +1178,12 @@ class AsyncDatabase:
                 if params:
                     return await c.execute(query, *params)
                 return await c.execute(query)
+        elif self._is_mysql:
+            async with conn.acquire() as c:
+                async with c.cursor() as cur:
+                    await cur.execute(query.replace('?', '%s'), params or ())
+                    await c.commit()
+                    return cur
         else:
             cursor = await conn.execute(query, params or ())
             await conn.commit()
@@ -1025,6 +1195,11 @@ class AsyncDatabase:
             async with conn.acquire() as c:
                 row = await c.fetchrow(query, *(params or ()))
                 return dict(row) if row else None
+        elif self._is_mysql:
+            async with conn.acquire() as c:
+                async with c.cursor(aiomysql.DictCursor) as cur:
+                    await cur.execute(query.replace('?', '%s'), params or ())
+                    return await cur.fetchone()
         else:
             cursor = await conn.execute(query, params or ())
             row = await cursor.fetchone()
@@ -1036,6 +1211,11 @@ class AsyncDatabase:
             async with conn.acquire() as c:
                 rows = await c.fetch(query, *(params or ()))
                 return [dict(r) for r in rows]
+        elif self._is_mysql:
+            async with conn.acquire() as c:
+                async with c.cursor(aiomysql.DictCursor) as cur:
+                    await cur.execute(query.replace('?', '%s'), params or ())
+                    return await cur.fetchall()
         else:
             cursor = await conn.execute(query, params or ())
             rows = await cursor.fetchall()
@@ -1043,10 +1223,14 @@ class AsyncDatabase:
 
     @property
     def driver(self) -> str:
-        return 'postgresql' if self._is_postgres else 'sqlite'
+        if self._is_postgres:
+            return 'postgresql'
+        if self._is_mysql:
+            return 'mysql'
+        return 'sqlite'
 
     def _ph(self) -> str:
-        return '$1' if self._is_postgres else '?'
+        return '?' if self.driver == 'sqlite' else '%s'
 
     async def __aenter__(self):
         await self.connect()
@@ -1104,7 +1288,8 @@ class AsyncModel:
 
     @classmethod
     def _ph(cls) -> str:
-        return '%s' if cls._get_db()._is_postgres else '?'
+        driver = cls._get_db().driver
+        return '?' if driver == 'sqlite' else '%s'
 
     @classmethod
     def _col_type(cls, t) -> str:
@@ -1124,10 +1309,12 @@ class AsyncModel:
 
     @classmethod
     async def create_table(cls):
-        db     = cls._get_db()
-        cols   = ', '.join(f"{c} {cls._col_type(t)}" for c, t in cls.schema.items())
+        db   = cls._get_db()
+        cols = ', '.join(f"{c} {cls._col_type(t)}" for c, t in cls.schema.items())
         if db._is_postgres:
             q = f"CREATE TABLE IF NOT EXISTS {cls.table} (id SERIAL PRIMARY KEY, {cols})"
+        elif db._is_mysql:
+            q = f"CREATE TABLE IF NOT EXISTS {cls.table} (id INTEGER AUTO_INCREMENT PRIMARY KEY, {cols}) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci"
         else:
             q = f"CREATE TABLE IF NOT EXISTS {cls.table} (id INTEGER PRIMARY KEY AUTOINCREMENT, {cols})"
         await db.execute(q)
@@ -1144,8 +1331,9 @@ class AsyncModel:
             row = await db.fetchone(q, list(data.values()))
             return await cls.get(row['id'])
         else:
+            # SQLite e MySQL usam lastrowid
             holders = ', '.join([ph] * len(data))
-            q = f"INSERT INTO {cls.table} ({cols}) VALUES ({holders})"
+            q      = f"INSERT INTO {cls.table} ({cols}) VALUES ({holders})"
             cursor = await db.execute(q, list(data.values()))
             return await cls.get(cursor.lastrowid)
 

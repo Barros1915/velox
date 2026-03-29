@@ -122,7 +122,7 @@ class SwaggerRouter:
             # Check if handler returns JSON (by name or docstring)
             if self._is_json_route(handler):
                 route = SwaggerRoute(
-                    path=pattern.raw,
+                    path=getattr(pattern, 'raw', str(pattern)),
                     method=method,
                     handler=handler,
                     summary=self._extract_summary(handler),

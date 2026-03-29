@@ -220,10 +220,12 @@ post.add_related('tags', tag)
 post.remove_related('tags', tag)
 ```
 
-SQLite por padrão, PostgreSQL com `pip install psycopg2-binary`:
+SQLite por padrão. Drivers para outros bancos:
 ```env
 DATABASE_URI=db/app.db
 # DATABASE_URI=postgresql://user:pass@localhost/mydb
+# DATABASE_URI=mysql://user:pass@localhost/mydb
+# DATABASE_URI=mariadb://user:pass@localhost/mydb
 ```
 
 ---
@@ -448,6 +450,15 @@ pip install velox-web[asgi]
 
 # Com PostgreSQL
 pip install velox-web[postgres]
+
+# Com MySQL
+pip install velox-web[mysql]
+
+# Com MariaDB (mesmo driver do MySQL)
+pip install velox-web[mariadb]
+
+# Com async (todos os drivers)
+pip install velox-web[async]
 
 # Tudo
 pip install velox-web[full]
