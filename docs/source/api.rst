@@ -30,9 +30,9 @@ Response
 Router / Blueprint
 ------------------
 
-.. autodata:: velox.core.Router
-   :doc:
+.. autoclass:: velox.core.Router
    :members:
+   :show-inheritance:
 
 WebSocket
 --------
