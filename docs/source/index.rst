@@ -1,5 +1,5 @@
 Documentação do Velox Framework
-=============================
+================================
 
 .. image:: ../assets/logo_velox.png
    :target: https://github.com/Barros1915/velox
@@ -48,12 +48,18 @@ Suporta ambos os modos:
 
 .. toctree::
    :maxdepth: 2
+   :caption: Segurança
+
+   auth
+
+.. toctree::
+   :maxdepth: 2
    :caption: API Reference
 
    api
 
 Por que usar Velox?
-------------------
+-------------------
 
 - **Zero Dependencies** — Sem pacotes externos para uso básico
 - **Blazing Fast** — Otimizado para performance
@@ -66,7 +72,7 @@ Por que usar Velox?
 - **Arquivos Estáticos** — Servir CSS, JS, imagens
 
 Exemplo Rápido
--------------
+--------------
 
 .. code-block:: python
 
@@ -86,7 +92,7 @@ Exemplo Rápido
    app.run()
 
 Instalação
----------
+----------
 
 .. code-block:: bash
 
@@ -108,7 +114,7 @@ Links
 - `Report Issues <https://github.com/Barros1915/velox/issues>`_
 
 Índices e tabelas
-==================
+=================
 
 * :ref:`genindex`
 * :ref:`modindex`
