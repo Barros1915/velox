@@ -279,3 +279,77 @@ Se a conexão fechar imediatamente:
 3. **Use HTTPS em produção** - Navegadores exigem WSS (WebSocket Secure) em HTTPS
 
 4. **Verifique logs do servidor** - O Velox mostra logs de conexão no terminal
+
+---
+
+Comparação com Flask e Django
+-----------------------------
+
+O Velox é mais simples que frameworks tradicionais para WebSocket:
+
++------------------+-------------------+-------------------+-------------------+
+|                  | Velox             | Flask-SocketIO    | Django Channels   |
++==================+===================+===================+===================+
+| Dependências     | 0 (built-in)      | flask-socketio    | channels + daphne |
++------------------+-------------------+-------------------+-------------------+
+| Linhas de código | ~5                | ~10               | ~30+              |
++------------------+-------------------+-------------------+-------------------+
+| Configuração     | Nenhuma           | Mínima            | Extensa           |
++------------------+-------------------+-------------------+-------------------+
+| Rooms/Broadcast  | Built-in          | Built-in          | Precisa config    |
++------------------+-------------------+-------------------+-------------------+
+
+**Flask com flask-socketio:**
+
+.. code-block:: python
+
+   from flask import Flask
+   from flask_socketio import SocketIO, emit
+
+   app = Flask(__name__)
+   socketio = SocketIO(app)
+
+   @socketio.on('message')
+   def handle_message(data):
+       emit('response', {'data': f'echo: {data}'})
+
+   socketio.run(app)
+
+**Django com Channels:**
+
+.. code-block:: python
+
+   # consumers.py
+   from channels.generic.websocket import AsyncWebsocketConsumer
+
+   class ChatConsumer(AsyncWebsocketConsumer):
+       async def connect(self):
+           await self.accept()
+
+       async def receive(self, text_data):
+           await self.send(text_data=json.dumps({'response': f'echo: {text_data}'}))
+
+   # routing.py
+   from django.urls import path
+   from . import consumers
+   websocket_urlpatterns = [path('ws/chat/', consumers.ChatConsumer.as_asgi())]
+
+**Velox (mesmo resultado, muito mais simples):**
+
+.. code-block:: python
+
+   from velox import Velox
+
+   app = Velox(__name__)
+
+   @app.websocket('/ws/chat')
+   async def chat(ws):
+       while True:
+           msg = await ws.receive()
+           if msg is None: break
+           await ws.send(f'echo: {msg}')
+
+   app.run(asgi=True)
+
+**Resultado:** O Velox faz em 5 linhas o que outros frameworks fazem em 10-30+ linhas,
+sem nenhuma dependência extra.
