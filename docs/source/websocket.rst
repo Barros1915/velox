@@ -29,7 +29,17 @@ Uso Básico
                break
            await ws.send(f'echo: {msg}')
 
-   app.run(asgi=True)
+   # Opção 1: Use app.run(asgi=True) OU execute via CLI uvicorn
+   # Não use ambos no mesmo arquivo!
+   if __name__ == '__main__':
+       app.run(asgi=True)
+
+Executar (escolha UM):
+   # Opção 1: Via Python
+   python app.py
+   
+   # Opção 2: Via uvicorn (recomendado em produção)
+   uvicorn app:app --host localhost --port 8000 --reload
 
 Client JavaScript:
 
