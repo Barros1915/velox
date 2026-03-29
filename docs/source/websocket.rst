@@ -12,7 +12,7 @@ Requer modo ASGI:
 ---
 
 Uso Básico
-----------
+-----------
 
 .. code-block:: python
 
@@ -22,7 +22,7 @@ Uso Básico
 
    @app.websocket('/ws/chat')
    async def chat(ws):
-       await ws.accept()
+       # Não precisa de ws.accept() - o Velox faz automaticamente!
        while True:
            msg = await ws.receive()
            if msg is None:
@@ -37,11 +37,67 @@ Client JavaScript:
 
    const ws = new WebSocket('ws://localhost:8000/ws/chat');
 
-   ws.onopen = () => console.log('Conectado');
+   ws.onopen = () => {
+       // Importante: esperar um pouco antes de enviar
+       setTimeout(() => ws.send('Olá'), 500);
+   };
+   
    ws.onmessage = (e) => console.log('Recebeu:', e.data);
-   ws.send('Olá');
+   ws.onclose = (e) => console.log('Fechado:', e.code);
 
-   ws.close();
+**Nota:** O ``await ws.accept()`` não é necessário - o Velox já faz isso automaticamente
+antes de chamar o handler.
+
+---
+
+Página de Teste HTML
+---------------------
+
+Crie um arquivo ``websocket-test.html`` para testar:
+
+.. code-block:: html
+
+   <!DOCTYPE html>
+   <html>
+   <head>
+       <title>WebSocket Test</title>
+       <style>
+           body { font-family: sans-serif; padding: 20px; background: #0d0d0d; color: #fff; }
+           .messages { background: #1a1a1a; padding: 15px; height: 200px; overflow-y: auto; margin: 10px 0; }
+           .msg { padding: 5px; margin: 5px 0; border-radius: 5px; }
+           .sent { background: #5865f2; margin-left: 50px; }
+           .received { background: #22c55e; color: #000; margin-right: 50px; }
+       </style>
+   </head>
+   <body>
+       <h1>🔌 WebSocket Test</h1>
+       <button onclick="connect()">Conectar</button>
+       <button onclick="send()">Enviar</button>
+       <div id="msgs" class="messages"></div>
+       <input id="input" placeholder="Mensagem..." />
+       
+       <script>
+           let ws;
+           function connect() {
+               ws = new WebSocket('ws://localhost:8000/ws/chat');
+               ws.onopen = () => log('Conectado!');
+               ws.onmessage = (e) => log(e.data, 'received');
+               ws.onclose = () => log('Desconectado');
+           }
+           function send() {
+               const msg = document.getElementById('input').value;
+               ws.send(msg);
+               log(msg, 'sent');
+           }
+           function log(msg, type='info') {
+               const d = document.createElement('div');
+               d.className = 'msg ' + type;
+               d.textContent = msg;
+               document.getElementById('msgs').appendChild(d);
+           }
+       </script>
+   </body>
+   </html>
 
 ---
 
@@ -204,3 +260,22 @@ Use o gerenciador padrão:
    from velox.websocket import get_manager
 
    manager = get_manager()  # retorna instância única
+
+---
+
+Troubleshooting
+---------------
+
+Se a conexão fechar imediatamente:
+
+1. **Use delay no cliente** - O ``ws.send()`` deve esperar após ``onopen``:
+
+   .. code-block:: javascript
+
+      ws.onopen = () => setTimeout(() => ws.send('msg'), 500);
+
+2. **Verifique o firewall** - Some firewalls bloqueiam WebSocket
+
+3. **Use HTTPS em produção** - Navegadores exigem WSS (WebSocket Secure) em HTTPS
+
+4. **Verifique logs do servidor** - O Velox mostra logs de conexão no terminal
