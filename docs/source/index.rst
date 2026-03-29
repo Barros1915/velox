@@ -33,6 +33,8 @@ Suporta ambos os modos:
    :caption: Banco de Dados
 
    database
+   migrations
+   paginator
 
 .. toctree::
    :maxdepth: 2
@@ -48,15 +50,55 @@ Suporta ambos os modos:
 
 .. toctree::
    :maxdepth: 2
-   :caption: Segurança
+   :caption: Formulários
 
-   auth
+   forms
+   validators
 
 .. toctree::
    :maxdepth: 2
-   :caption: API Reference
+   :caption: Segurança
 
-   api
+   auth
+   session
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Performance
+
+   cache
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Realtime
+
+   websocket
+   signals
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Admin
+
+   admin
+
+.. toctree::
+   :maxdepth: 2
+   :caption: CLI
+
+   cli
+
+.. toctree::
+   :maxdepth: 2
+   :caption: API
+
+   swagger
+   serializers
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Email
+
+   mail
 
 Por que usar Velox?
 -------------------
