@@ -517,7 +517,6 @@ class DatabaseAuthBackend(AuthBackend):
                 )
             ''')
 
-        print(f'✓ Auth backend: banco ({self.db.driver})')
         self._cleanup = SessionCleanup(self)
         self._cleanup.start()
 
@@ -1123,7 +1122,6 @@ def _create_auth_backend() -> AuthBackend:
     backend = os.getenv('AUTH_BACKEND', 'memory').lower()
     if backend == 'database':
         return DatabaseAuthBackend()
-    print('✓ Auth backend: memória')
     return SessionBasedAuthBackend()
 
 

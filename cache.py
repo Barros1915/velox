@@ -484,15 +484,12 @@ def _create_cache() -> Any:
     
     if backend == 'redis':
         url = os.getenv('CACHE_REDIS_URL', 'redis://localhost:6379/0')
-        print(f'✓ Cache backend: Redis ({url})')
         return RedisCache(url, prefix)
     
     if backend == 'file':
         db_path = os.getenv('CACHE_DB', 'cache.db')
-        print(f'✓ Cache backend: SQLite ({db_path})')
         return FileCache(db_path, prefix)
     
-    print('✓ Cache backend: memória')
     return Cache(prefix)
 
 
