@@ -13,7 +13,7 @@ Install Velox from PyPI:
 
 .. code-block:: bash
 
-pip install velox-web
+    pip install velox-web
 
 This installs Velox without any dependencies.
 
@@ -24,7 +24,7 @@ To use async features, install with uvicorn:
 
 .. code-block:: bash
 
-   pip install velox-web[asgi]
+    pip install velox-web[asgi]
 
 This installs:
 
@@ -38,7 +38,7 @@ To install all features:
 
 .. code-block:: bash
 
-   pip install velox-web[full]
+    pip install velox-web[full]
 
 This installs:
 
@@ -56,7 +56,7 @@ For local development:
 
 .. code-block:: bash
 
-   pip install velox-web[dev]
+    pip install velox-web[dev]
 
 This installs:
 
