@@ -303,10 +303,118 @@ Fluxo completo — do zero ao projeto rodando
 
 ---
 
+Rodar em produção
+-----------------
+
+O Velox pode ser executado de várias formas:
+
+**Opção 1: Via app.run()**
+   python app.py
+
+**Opção 2: Via uvicorn**
+   uvicorn app:app --host localhost --port 8001 --reload
+
+**Opção 3: Via gunicorn (produção)**
+   gunicorn app:app -w 4 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:8000
+
+**Opção 4: Via gunicorn com workers async**
+   gunicorn app:app -w 2 -k uvicorn.workers.UvicornH11Worker --bind 0.0.0.0:8000
+
+**Opção 5: Via systemd (Linux/produção)**
+   Crie um serviço em /etc/systemd/system/velox.service:
+
+   .. code-block:: ini
+
+      [Unit]
+      Description=Velox Application
+      After=network.target
+
+      [Service]
+      User=www-data
+      Group=www-data
+      WorkingDirectory=/var/www/meu-projeto
+      ExecStart=/var/www/meu-projeto/venv/bin/gunicorn app:app -w 4 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:8000
+      Restart=always
+
+      [Install]
+      WantedBy=multi-user.target
+
+   .. code-block:: bash
+
+      sudo systemctl enable velox
+      sudo systemctl start velox
+
+**Opção 6: Via Docker**
+   Dockerfile:
+
+   .. code-block:: dockerfile
+
+      FROM python:3.12-slim
+      WORKDIR /app
+      COPY requirements.txt .
+      RUN pip install -r requirements.txt
+      COPY . .
+      CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
+
+   .. code-block:: bash
+
+      docker build -t velox-app .
+      docker run -p 8000:8000 velox-app
+
+**Opção 7: Via Dockerfile-composer (multi-container)**
+   docker-compose.yml:
+
+   .. code-block:: yaml
+
+      version: '3.8'
+      services:
+        app:
+          build: .
+          ports:
+            - "8000:8000"
+          environment:
+            - DATABASE_URI=postgresql://user:pass@db:5432/myapp
+            - CACHE_REDIS_URL=redis://cache:6379/0
+        db:
+          image: postgres:16
+          environment:
+            - POSTGRES_DB=myapp
+            - POSTGRES_USER=user
+            - POSTGRES_PASSWORD=pass
+          volumes:
+            - pgdata:/var/lib/postgresql/data
+        cache:
+          image: redis:7-alpine
+      volumes:
+        pgdata:
+
+   .. code-block:: bash
+
+      docker-compose up -d
+
+**Resumo das opções:**
+
++----------------------+---------------------------+---------------------------+
+| Método               | Uso                       | Recomendação              |
++======================+===========================+===========================+
+| python app.py        | Desenvolvimento          | Apenas dev                |
++----------------------+---------------------------+---------------------------+
+| uvicorn --reload     | Desenvolvimento           | Dev com auto-reload       |
++----------------------+---------------------------+---------------------------+
+| gunicorn             | Produção                  | Recomendado para produção  |
++----------------------+---------------------------+---------------------------+
+| systemd              | Produção (Linux)          | Servidores Linux          |
++----------------------+---------------------------+---------------------------+
+| Docker               | Containerização          | Ambientes isolados        |
++----------------------+---------------------------+---------------------------+
+| Docker Compose       | Multi-container          | Stack completo (db+cache)  |
++----------------------+---------------------------+---------------------------+
+
+---
+
 Links
 ------
 
 - PyPI: https://pypi.org/project/velox-web/
 - GitHub: https://github.com/Barros1915/velox
 - Docs: https://velox.readthedocs.io/
-- Site: https://barros1915.github.io/velox/
