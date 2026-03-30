@@ -29,23 +29,25 @@ Uso Básico
                break
            await ws.send(f'echo: {msg}')
 
-   # Opção 1: Use app.run(asgi=True) OU execute via CLI uvicorn
-   # Não use ambos no mesmo arquivo!
+   # Opções de execução (escolha UMA):
+   # uvicorn app:app --host localhost --port 8001 --reload
+   # python app.py (via app.run)
    if __name__ == '__main__':
-       app.run(asgi=True)
+       app.run(asgi=True, port=8001)
 
-Executar (escolha UM):
+Executar (escolha UMA):
+
    # Opção 1: Via Python
    python app.py
-   
+
    # Opção 2: Via uvicorn (recomendado em produção)
-   uvicorn app:app --host localhost --port 8000 --reload
+   uvicorn app:app --host localhost --port 8001 --reload
 
 Client JavaScript:
 
 .. code-block:: javascript
 
-   const ws = new WebSocket('ws://localhost:8000/ws/chat');
+   const ws = new WebSocket('ws://localhost:8001/ws/chat');
 
    ws.onopen = () => {
        // Importante: esperar um pouco antes de enviar
