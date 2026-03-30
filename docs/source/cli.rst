@@ -1,155 +1,312 @@
 CLI - Interface de Linha de Comando
 ====================================
 
-Comandos disponíveis para criar projetos, apps e gerenciar o servidor.
+Todos os comandos disponíveis no ``velox`` com exemplos práticos.
 
 Instalação
 ----------
-
-O CLI é instalado junto com o Velox:
 
 .. code-block:: bash
 
    pip install velox-web
 
-Comandos
---------
+---
 
-init - Criar Projeto
-~~~~~~~~~~~~~~~~~~~~
-
-Cria um novo projeto com estrutura completa:
+``velox init`` — Cria um novo projeto
+-------------------------------------
 
 .. code-block:: bash
 
    velox init meu-projeto
 
-Estrutura gerada:
+**Saída:**
 
 ::
 
-   meu-projeto/
-   ├── app.py              # ponto de entrada
-   ├── .env                # configurações
-   ├── .gitignore
-   ├── requirements.txt
-   ├── db/.gitkeep
-   ├── static/
-   │   ├── css/style.css
-   │   └── img/velox-logo.png
-   └── templates/
-       ├── index.html
-       └── 404.html
+   ✔   meu-projeto/app.py
+   ✔   meu-projeto/.env
+   ✔   meu-projeto/.gitignore
+   ✔   meu-projeto/requirements.txt
+   ✔   meu-projeto/templates/index.html
+   ✔   meu-projeto/templates/404.html
+   ✔   meu-projeto/static/css/style.css
+   ✔   meu-projeto/static/img/velox-logo.png
 
-startapp - Criar App Modular
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   ✅ Projeto criado com sucesso!
 
-Cria um app modular (como Django):
+     → cd meu-projeto
+     → velox run
+
+---
+
+``velox startapp`` — Cria um app modular
+------------------------------------------
 
 .. code-block:: bash
 
+   # App completo (com templates)
    velox startapp blog
 
-   # Para API-only (sem templates)
+   # App API-only (sem templates)
    velox startapp api --api
 
-Estrutura gerada:
+   # Sobrescreve se já existir
+   velox startapp blog --force
+
+**Saída (app completo):**
 
 ::
 
-   blog/
-   ├── __init__.py
-   ├── models.py     # models do app
-   ├── views.py      # rotas/handlers
-   ├── admin.py      # interface admin
-   ├── tests.py      # testes
-   └── templates/
-       └── blog/
-           ├── list.html
-           └── form.html
+   ✔   blog/__init__.py
+   ✔   blog/models.py
+   ✔   blog/views.py
+   ✔   blog/admin.py
+   ✔   blog/tests.py
+   ✔   blog/templates/blog/list.html
+   ✔   blog/templates/blog/form.html
 
-Registrar no app.py:
+   App 'blog' criado!
 
-.. code-block:: python
+     Adicione em app.py:
+       from blog.views import router
+       app.include(router)
 
-   from velox import Velox
-   from blog.views import router
+---
 
-   app = Velox(__name__)
-   app.include(router)
-
-run - Iniciar Servidor
-~~~~~~~~~~~~~~~~~~~~~~
+``velox run`` — Inicia o servidor
+---------------------------------
 
 .. code-block:: bash
 
-   # Padrão (porta 8000)
+   # Servidor padrão (localhost:8000)
    velox run
 
    # Porta customizada
    velox run --port 5000
 
-   # Com auto-reload
+   # Com auto-reload (recomendado em desenvolvimento)
    velox run --reload
 
-create - Criar Arquivos
-~~~~~~~~~~~~~~~~~~~~~~~
+   # Exposto na rede local
+   velox run --host 0.0.0.0 --port 8080
 
-.. code-block:: bash
+   # Arquivo de app diferente
+   velox run minha_app.py --port 3000 --reload
 
-   # Criar model
-   velox create model User
+**Saída:**
 
-   # Criar views
-   velox create view profile
+::
 
-   # Criar middleware
-   velox create middleware cors
+   🌐 http://localhost:8000
+   ↺ Auto-reload ativado
+   Ctrl+C para parar
 
-   # Criar template
-   velox create template dashboard
+---
 
-routes - Listar Rotas
-~~~~~~~~~~~~~~~~~~~~~
+``velox routes`` — Lista as rotas registradas
+---------------------------------------------
 
 .. code-block:: bash
 
    velox routes
 
-   # GET     /
-   # GET     /api/users
-   # POST    /api/users
-   # WS      /ws/chat
+   # Arquivo de app diferente
+   velox routes minha_app.py
 
-version - Versão
-~~~~~~~~~~~~~~~~
+**Saída:**
+
+::
+
+   Rotas registradas:
+
+   GET       /
+   GET       /sobre
+   GET       /api/posts
+   POST      /api/posts
+   GET       /api/posts/<id>
+   PUT       /api/posts/<id>
+   DELETE    /api/posts/<id>
+   GET       /admin/
+   POST      /admin/login
+
+   Total: 9 rota(s)
+
+---
+
+``velox create`` — Cria arquivos no projeto
+-------------------------------------------
+
+.. code-block:: bash
+
+   # Criar um model
+   velox create model produto
+
+   # Criar uma view
+   velox create view home
+
+   # Criar um middleware
+   velox create middleware autenticacao
+
+   # Criar um template HTML
+   velox create template contato
+
+**Saída:**
+
+::
+
+   ✔ Criado: models/produto.py
+   ✔ Criado: views/home.py
+   ✔ Criado: middlewares/autenticacao.py
+   ✔ Criado: templates/contato.html
+
+---
+
+``velox makemigration`` — Cria um arquivo de migration
+------------------------------------------------------
+
+.. code-block:: bash
+
+   velox makemigration create_posts
+   velox makemigration add_autor_to_posts
+   velox makemigration create_tags
+
+**Saída:**
+
+::
+
+   ✔ Migration criada: migrations/20260329120000_create_posts.py
+   → Edite o arquivo e rode: velox migrate
+
+**Arquivo gerado** (``migrations/20260329120000_create_posts.py``):
+
+.. code-block:: python
+
+   """
+   Migration: create_posts
+   Created: 2026-03-29 12:00:00
+   """
+   from velox.migrations import Migration
+
+
+   class CreateMigration(Migration):
+       def __init__(self):
+           super().__init__("create_posts")
+
+       def forward(self):
+           self.create_table('posts', {
+               'id':         'INTEGER PRIMARY KEY AUTOINCREMENT',
+               'titulo':     'TEXT NOT NULL',
+               'conteudo':   'TEXT',
+               'criado_em':  'TIMESTAMP DEFAULT CURRENT_TIMESTAMP',
+           })
+
+       def backward(self):
+           self.drop_table('posts')
+
+---
+
+``velox migrate`` — Aplica as migrations pendentes
+----------------------------------------------------
+
+.. code-block:: bash
+
+   velox migrate
+
+**Saída (primeira vez):**
+
+::
+
+   ✔ Aplicada: create_posts
+   ✔ Aplicada: add_autor_to_posts
+   ✔ Aplicada: create_tags
+
+   3 migration(s) aplicada(s).
+
+**Saída (já aplicadas):**
+
+::
+
+     Já aplicada: create_posts
+     Já aplicada: add_autor_to_posts
+     Já aplicada: create_tags
+   → Nenhuma migration pendente.
+
+---
+
+``velox createuser`` — Cria um usuário admin
+---------------------------------------------
+
+.. code-block:: bash
+
+   # Modo interativo (recomendado)
+   velox createuser
+
+   # Passando username e email diretamente
+   velox createuser --username joao --email joao@email.com
+
+**Saída (modo interativo):**
+
+::
+
+   Criar usuário admin
+
+     Username: admin
+     Email: admin@meusite.com
+     Senha: ••••••••
+     Confirmar senha: ••••••••
+
+   ✔ Usuário 'admin' criado com sucesso!
+   → Acesse /admin/ com suas credenciais.
+
+---
+
+``velox version`` — Exibe a versão
+----------------------------------
 
 .. code-block:: bash
 
    velox version
 
-   # Velox Framework v1.0.0
-   # Python 3.12.0
+**Saída:**
+
+::
+
+   Velox Framework v1.0.0
+   Python 3.12.0
 
 ---
 
-Auto-reload
------------
+Fluxo completo — do zero ao projeto rodando
+-------------------------------------------
 
-O servidor monitora arquivos e reinicia automaticamente quando detecta mudanças.
+.. code-block:: bash
 
-Arquivos monitorados: ``.py``, ``.html``, ``.css``, ``.js``, ``.env``
+   # 1. Criar projeto
+   velox init minha-loja
+   cd minha-loja
 
-Arquivos ignorados: ``__pycache__``, ``.git``, ``node_modules``
+   # 2. Criar apps
+   velox startapp produtos
+   velox startapp usuarios
+   velox startapp api --api
+
+   # 3. Criar migration e aplicar
+   velox makemigration create_produtos
+   # (edite o arquivo em migrations/)
+   velox migrate
+
+   # 4. Criar usuário admin
+   velox createuser
+
+   # 5. Rodar o servidor
+   velox run --reload
 
 ---
 
-Cores no Terminal
------------------
+Links
+------
 
-O CLI usa cores ANSI para melhor legibilidade:
-
-- **Verde** ✓ Sucesso
-- **Amarelo** ⚠ Aviso
-- **Vermelho** ✘ Erro
-- **Ciano** → Informação
+- PyPI: https://pypi.org/project/velox-web/
+- GitHub: https://github.com/Barros1915/velox
+- Docs: https://velox.readthedocs.io/
+- Site: https://barros1915.github.io/velox/

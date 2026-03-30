@@ -930,15 +930,31 @@ class CLI:
         # version
         sub.add_parser('version', help='Exibe a versão do Velox')
 
+        # makemigration
+        p_mm = sub.add_parser('makemigration', help='Cria um arquivo de migration')
+        p_mm.add_argument('name', help='Nome da migration (ex: create_users)')
+
+        # migrate
+        sub.add_parser('migrate', help='Aplica todas as migrations pendentes')
+
+        # createuser
+        p_cu = sub.add_parser('createuser', help='Cria um usuário admin interativamente')
+        p_cu.add_argument('--username', help='Nome de usuário')
+        p_cu.add_argument('--email',    help='Email do usuário')
+        p_cu.add_argument('--password', help='Senha do usuário')
+
     def run(self, args=None):
         parsed = self.parser.parse_args(args)
         commands = {
-            'init':     self._cmd_init,
-            'startapp': self._cmd_startapp,
-            'run':      self._cmd_run,
-            'create':   self._cmd_create,
-            'routes':   self._cmd_routes,
-            'version':  self._cmd_version,
+            'init':          self._cmd_init,
+            'startapp':      self._cmd_startapp,
+            'run':           self._cmd_run,
+            'create':        self._cmd_create,
+            'routes':        self._cmd_routes,
+            'version':       self._cmd_version,
+            'makemigration': self._cmd_makemigration,
+            'migrate':       self._cmd_migrate,
+            'createuser':    self._cmd_createuser,
         }
         fn = commands.get(parsed.command)
         if fn:
@@ -1104,6 +1120,158 @@ class CLI:
     def _cmd_version(self, parsed):
         print(f"\n{Color.CYAN}Velox Framework{Color.RESET} v{self.VERSION}")
         print(f"{Color.GRAY}Python {sys.version.split()[0]}{Color.RESET}\n")
+
+
+    def _cmd_makemigration(self, parsed):
+        """Cria um arquivo de migration vazio com timestamp"""
+        name = parsed.name.strip().lower().replace(' ', '_')
+        if not name.isidentifier():
+            print(Color.error(f"Nome inválido: '{name}'. Use apenas letras, números e underscores."))
+            return
+
+        from datetime import datetime
+        migrations_dir = Path('migrations')
+        migrations_dir.mkdir(exist_ok=True)
+
+        init = migrations_dir / '__init__.py'
+        if not init.exists():
+            init.write_text('', encoding='utf-8')
+
+        timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
+        filename  = f'{timestamp}_{name}.py'
+        filepath  = migrations_dir / filename
+
+        content = f'''"""
+Migration: {name}
+Created: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+"""
+from velox.migrations import Migration
+
+
+class CreateMigration(Migration):
+    def __init__(self):
+        super().__init__("{name}")
+
+    def forward(self):
+        # Adicione suas operações aqui
+        # Exemplos:
+        # self.create_table('produtos', {{
+        #     'id':        'INTEGER PRIMARY KEY AUTOINCREMENT',
+        #     'nome':      'TEXT NOT NULL',
+        #     'preco':     'REAL',
+        #     'criado_em': 'TIMESTAMP DEFAULT CURRENT_TIMESTAMP',
+        # }})
+        # self.add_column('usuarios', 'telefone', 'TEXT')
+        pass
+
+    def backward(self):
+        # Adicione operações de rollback
+        # self.drop_table('produtos')
+        pass
+'''
+        filepath.write_text(content, encoding='utf-8')
+        print(Color.ok(f"Migration criada: migrations/{filename}"))
+        print(Color.info("Edite o arquivo e rode: velox migrate"))
+
+    def _cmd_migrate(self, parsed):
+        """Aplica todas as migrations pendentes"""
+        migrations_dir = Path('migrations')
+        if not migrations_dir.exists():
+            print(Color.warn("Pasta 'migrations/' não encontrada. Rode 'velox makemigration' primeiro."))
+            return
+
+        sys.path.insert(0, os.getcwd())
+
+        try:
+            from velox.migrations import MigrationManager
+        except ImportError:
+            print(Color.error("Não foi possível importar velox.migrations."))
+            return
+
+        db_uri  = os.getenv('DATABASE_URI', 'db/app.db')
+        manager = MigrationManager(db_uri)
+        applied = 0
+
+        for f in sorted(migrations_dir.glob('*.py')):
+            if f.name == '__init__.py':
+                continue
+            import importlib.util
+            spec   = importlib.util.spec_from_file_location(f.stem, f)
+            module = importlib.util.module_from_spec(spec)
+            try:
+                spec.loader.exec_module(module)
+            except Exception as e:
+                print(Color.error(f"Erro ao carregar {f.name}: {e}"))
+                continue
+
+            migration_cls = getattr(module, 'CreateMigration', None)
+            if migration_cls is None:
+                continue
+
+            migration = migration_cls()
+            if migration.name not in manager.get_applied():
+                try:
+                    migration.forward()
+                    manager._record_migration(migration.name)
+                    print(Color.ok(f"Aplicada: {migration.name}"))
+                    applied += 1
+                except Exception as e:
+                    print(Color.error(f"Erro em '{migration.name}': {e}"))
+            else:
+                print(Color.skip(f"Já aplicada: {migration.name}"))
+
+        if applied == 0:
+            print(Color.info("Nenhuma migration pendente."))
+        else:
+            print(Color.bold(f"\n{applied} migration(s) aplicada(s)."))
+
+    def _cmd_createuser(self, parsed):
+        """Cria um usuário admin interativamente"""
+        import getpass
+
+        print(f"\n{Color.bold('Criar usuário admin')}\n")
+
+        # Username
+        username = getattr(parsed, 'username', None)
+        while not username:
+            username = input(f"  {Color.CYAN}Username:{Color.RESET} ").strip()
+            if not username:
+                print(Color.warn("  Username não pode ser vazio."))
+                username = None
+
+        # Email
+        email = getattr(parsed, 'email', None)
+        while not email:
+            email = input(f"  {Color.CYAN}Email:{Color.RESET} ").strip()
+            if not email or '@' not in email:
+                print(Color.warn("  Email inválido."))
+                email = None
+
+        # Password
+        password = getattr(parsed, 'password', None)
+        while not password:
+            password = getpass.getpass(f"  {Color.CYAN}Senha:{Color.RESET} ").strip()
+            if len(password) < 6:
+                print(Color.warn("  Senha deve ter pelo menos 6 caracteres."))
+                password = None
+                continue
+            confirm = getpass.getpass(f"  {Color.CYAN}Confirmar senha:{Color.RESET} ").strip()
+            if password != confirm:
+                print(Color.warn("  As senhas não conferem."))
+                password = None
+
+        sys.path.insert(0, os.getcwd())
+        try:
+            from velox.auth import create_user
+            create_user(username, email, password)
+            print()
+            print(Color.ok(f"Usuário '{username}' criado com sucesso!"))
+            print(Color.info("Acesse /admin/ com suas credenciais."))
+        except ImportError:
+            print(Color.error("Módulo velox.auth não encontrado."))
+        except Exception as e:
+            print(Color.error(f"Erro ao criar usuário: {e}"))
+        print()
 
 
 def main():
